@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="view_hostel_category_list" model="ir.ui.view">
+        <field name="name">hostel_category.view.list</field>
+        <field name="model">hostel.category</field>
+        <field name="arch" type="xml">
+            <list string="">
+                <field name="name"/>
+                <field name="parent_id"/>
+                <field name="parent_path"/>
+                <field name="child_ids"/>
+                
+            </list>
+        </field>
+    </record>
+    <record id="view_hostel_category_form" model="ir.ui.view">
+        <field name="name">hostel_category.view.form</field>
+        <field name="model">hostel.category</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="parent_id"/>
+                        <field name="parent_path"/>
+                        <field name="child_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+</odoo>

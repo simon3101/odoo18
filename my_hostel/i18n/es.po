@@ -1,0 +1,140 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* my_hostel
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-19 22:48+0000\n"
+"PO-Revision-Date: 2024-11-19 22:48+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: my_hostel
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
+msgid "Address"
+msgstr "Dirección"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__hostel_code
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
+msgid "Code"
+msgstr "Código"
+
+#. module: my_hostel
+#: model_terms:ir.actions.act_window,help:my_hostel.action_hostel
+msgid "Create Hostel."
+msgstr "Crear un Hotel"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__display_name
+msgid "Display Name"
+msgstr "Nombre a mostrar"
+
+#. module: my_hostel
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
+msgid "General"
+msgstr "General"
+
+#. module: my_hostel
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
+msgid "General 3"
+msgstr "General 3"
+
+#. module: my_hostel
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
+msgid "General2"
+msgstr "General 2"
+
+#. module: my_hostel
+#: model:ir.actions.act_window,name:my_hostel.action_hostel
+#: model:ir.ui.menu,name:my_hostel.hostel_main_menu
+#: model:ir.ui.menu,name:my_hostel.hostel_type_menu
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
+msgid "Hostel"
+msgstr "Hotel"
+
+#. module: my_hostel
+#: model:ir.module.category,name:my_hostel.module_category_hostel
+msgid "Hostel Management"
+msgstr "Gestión de Hotel"
+
+#. module: my_hostel
+#: model:res.groups,name:my_hostel.group_hostel_manager
+msgid "Hostel Manager"
+msgstr "Gerente de Hotel"
+
+#. module: my_hostel
+#: model:res.groups,name:my_hostel.group_hostel_user
+msgid "Hostel User"
+msgstr "Usuario del Hotel"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__name
+msgid "Hotel Name"
+msgstr "Nombre del Hotel"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__id
+msgid "ID"
+msgstr "Identificador"
+
+#. module: my_hostel
+#: model:ir.model,name:my_hostel.model_hostel_hostel
+msgid "Information about hostel"
+msgstr "Informacion acerca del Hotel"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__write_uid
+msgid "Last Updated by"
+msgstr "Ultima actualización por"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__write_date
+msgid "Last Updated on"
+msgstr "Fecha de ultima actualización"
+
+#. module: my_hostel
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
+msgid "Name"
+msgstr "Nombre"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__state_id
+msgid "State"
+msgstr "Estado"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__street
+msgid "Street"
+msgstr "Calle"
+
+#. module: my_hostel
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
+msgid "Street 2..."
+msgstr "Calle 2"
+
+#. module: my_hostel
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
+msgid "Street..."
+msgstr "Calle ..."
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__street2
+msgid "Street2"
+msgstr "Calle 2"

@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hostel_manager_id,access.hostel.manager,my_hostel.model_hostel_hostel,my_hostel.group_hostel_manager,1,1,1,1
+access_hostel_user_id,access.hostel.user,my_hostel.model_hostel_hostel,my_hostel.group_hostel_user,1,0,0,0
+access_room_manager_id,access.room.manager,my_hostel.model_hostel_room,my_hostel.group_hostel_manager,1,1,1,1
+access_room_user_id,access.room.user,my_hostel.model_hostel_room,my_hostel.group_hostel_user,1,0,0,0
+access_student_manager_id,access.student.manager,my_hostel.model_hostel_student,my_hostel.group_hostel_manager,1,1,1,1
+access_student_user_id,access.student.user,my_hostel.model_hostel_student,my_hostel.group_hostel_manager,1,0,0,0
+access_amenitie_manager_id,access.amenitie.manager,my_hostel.model_hostel_amenities,my_hostel.group_hostel_manager,1,1,1,1
+access_amenitie_user_id,access.amenitie.user,my_hostel.model_hostel_amenities,my_hostel.group_hostel_manager,1,0,0,0
+access_categ_manager_id,access.categ.manager,my_hostel.model_hostel_category,my_hostel.group_hostel_manager,1,1,1,1
+access_categ_user_id,access.categ.user,my_hostel.model_hostel_category,my_hostel.group_hostel_manager,1,0,0,0
