@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_my_petstore_my_petstore,my_petstore.my_petstore,model_my_petstore_my_petstore,base.group_user,1,1,1,1

@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="action_hostel" model="ir.actions.act_window">
+        <field name="name">Hostel</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hostel.hostel</field>
+        <field name="view_mode">list,form</field>
+        <!-- Si colocamos este filtro mostraremos campos inactivos -->
+        <!-- <field name="domain">[('active', '=', True)]</field> -->
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create Hostel.
+            </p>
+        </field>
+    </record>
+    
+    <record id="action_hostel_two" model="ir.actions.act_window">
+        <field name="name">Hostel Room</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hostel.room</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_hostel_three" model="ir.actions.act_window">
+        <field name="name">Hostel Student</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hostel.student</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_hostel_four" model="ir.actions.act_window">
+        <field name="name">Hostel Amenitie</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hostel.amenities</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_hostel_five" model="ir.actions.act_window">
+        <field name="name">Hostel Category</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hostel.category</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    
+</odoo>

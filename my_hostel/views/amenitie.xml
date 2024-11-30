@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="view_hostel_amenitie_list_view" model="ir.ui.view">
+        <field name="name">hostel.amenitie.list.view</field>
+        <field name="model">hostel.amenities</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="active"/>  
+            </list>
+        </field>
+    </record>
+    <record id="view_hostel_amenitie_form_view" model="ir.ui.view">
+        <field name="name">hostel.amenitie.form.view</field>
+        <field name="model">hostel.amenities</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group> 
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
