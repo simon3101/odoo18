@@ -5,7 +5,7 @@ class Hostel(models.Model):
 	# _rec_name = "my_hostel_hostel" - renombrar el registro
 	# _inherit = "res.partner" [act1]
 	# _name = 'model_hostel_hostel' - id externo
-	_order = "id asc, name" #orden por i y nombre, el id sera de manera ascendente
+	_order = "id asc ,name" #orden por i y nombre, el id sera de manera ascendente
 	_description = 'Information about hostel'
 	_rec_name = 'hostel_code' 
 	# _rec_names_search = ['name', 'code','street']
@@ -86,6 +86,4 @@ class Hostel(models.Model):
 		modelos = self.env['ir.model'].search([
 		('field_id.name', '=', 'message_ids')
 		])
-		print(modelos)
-		# name of the model of this field
 		return [(x.name, x.model) for x in modelos]

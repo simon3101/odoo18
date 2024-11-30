@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="view_hostel_library_list" model="ir.ui.view">
+        <field name="name">hostel_library.view.list</field>
+        <!-- Fijemosno, que como es una clase heredada, para llamar el modelo, tenemos que hacer una referencia al nombre del padre y el hijo -->
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <list string="">
+                <field name="is_hostel_rector"/>
+                <field name="assign_room_ids"/>
+                <field name="count_assign_room"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_hostel_library_form" model="ir.ui.view">
+        <field name="name">hostel_library.view.form</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="is_hostel_rector"/>
+                        <field name="assign_room_ids"/>
+                        <field name="count_assign_room"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

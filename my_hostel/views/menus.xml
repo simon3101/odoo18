@@ -6,4 +6,5 @@
     <menuitem id="student_menu" name="Student" action="action_hostel_three" parent="hostel_main_menu" />
     <menuitem id="amenitie_menu" name="Amenitie" action="action_hostel_four" parent="hostel_main_menu" />
     <menuitem id="category_menu" name="Category" action="action_hostel_five" parent="hostel_main_menu" />
+    <menuitem id="hostel_library" name="Library" action="action_hostel_six" parent="hostel_main_menu" />
 </odoo>
