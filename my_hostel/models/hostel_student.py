@@ -35,4 +35,3 @@ class HostelStudent(models.Model):
         string="Hostal", 
         related='room_id.hostel_id'
     )
-    print(hostel_id)
