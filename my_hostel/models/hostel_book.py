@@ -5,7 +5,7 @@ class ResPartner(models.Model):
     is_hostel_rector = fields.Boolean("Rector de Hostel",help="Activar si la siguiente persona es rector de hostel")
     
     #Aca estamos asignando muchos libros a muchas habitaciones
-    assign_room_ids = fields.Many2many('library.book', string='Libros Autorizados')
+    assign_room_ids = fields.Many2many('hostel.room', string='Libros Autorizados')
     #Aca calculamos con el meto _compute_count_room, la cantidad de libros asignado a la sala
     count_assign_room = fields.Integer('Número de Libros Autorizados', compute="_compute_count_room")
 

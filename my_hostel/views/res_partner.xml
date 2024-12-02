@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="my_hostel_res_parnert_inherit_view_form" model="ir.ui.view">
+        <field name="name">my_hostel.res_parnert.inherit.view_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!-- <xpath expr="//field[@name='campo_existente']" position="after">
+                    <field name="nuevo_campo"/>
+            </xpath> -->
+        </field>
+    </record>
+</odoo>

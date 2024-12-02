@@ -9,5 +9,3 @@ access_amenitie_manager_id,access.amenitie.manager,my_hostel.model_hostel_amenit
 access_amenitie_user_id,access.amenitie.user,my_hostel.model_hostel_amenities,my_hostel.group_hostel_manager,1,0,0,0
 access_categ_manager_id,access.categ.manager,my_hostel.model_hostel_category,my_hostel.group_hostel_manager,1,1,1,1
 access_categ_user_id,access.categ.user,my_hostel.model_hostel_category,my_hostel.group_hostel_manager,1,0,0,0
-access_book_user_id,access.book.user,my_hostel.model_res_partner,my_hostel.group_hostel_manager,1,1,1,1
-access_book_user_id,access.book.user,my_hostel.model_res_partner,my_hostel.group_hostel_manager,1,0,0,0

@@ -55,6 +55,8 @@ class HostelRoom(models.Model):
     discharge_date = fields.Date("Up date", help="Up student's Date")
     duration = fields.Integer("Duration", compute="_compute_check_duration", inverse="_inverse_duration",help="insert duration")
     
+    authored_book_ids = fields.Many2many("res.partner")
+
     @api.depends("student_per_room", "student_ids")
     def _compute_check_availability(self):
         """Método para comprobar la disponibilidad de la habitación"""
