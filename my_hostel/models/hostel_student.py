@@ -27,6 +27,7 @@ class HostelStudent(models.Model):
     room_id = fields.Many2one(
         "hostel.room",#nombre del comodelo
         string="Room",#string del campo
+        required=False,
         help="Select the hostel room"#ayuda para el campo
     )
 

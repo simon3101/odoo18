@@ -1,9 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
-    <!-- 3er registro - vista form  del hostel room-->
     <record id="view_hostel_room_view" model="ir.ui.view">
         <field name="name"> hostel.room.form.view</field>
-        <field name="model">hostel.room</field>
+        <field name="model">hostel.room.copy</field>
         <field name="arch" type='xml'>
             <form string="Room">
                 <sheet>
@@ -26,23 +25,6 @@
                     </group>  
                 </sheet>
             </form>
-        </field>
-    </record>
-    <!-- 4to registro - vista list del hostel room-->
-    <record id="view_hostel_room_list_view" model="ir.ui.view">
-        <field name="name">hostel.room.list.view</field>
-        <field name="model">hostel.room</field>
-        <field name="arch" type="xml">
-            <list>
-                <field name="name"/>    
-                <field name="hostel_id"/>
-                <field name="roomNo"/>
-                <field name="floorNo"/>
-                <field name="rent_amount"/>
-                <field name="currency_id"/>
-                <field name="student_ids"/>
-                <field name="hostel_amenities_ids"/>
-            </list>
         </field>
     </record>
 </odoo>
