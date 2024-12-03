@@ -36,9 +36,7 @@ class HostelRoom(models.Model):
         "hostel.amenities",#comodelo relacionado, en este caso amenities
         "hostel_room_amenities_rel", #nombre de la tabla relacionada, si no esta creada, se crea una
         "room_id", #campo many2one del modelo student
-        "amenitiy_id", #campo many2one del modelo Amenity que se relaciona con el campo many2one del modelo Student
-        #si no existe este nombre se crea por defecto, 
-        #por lo general estos son parametros opcionales
+        "amenitiy_id", #campo many2one del modelo Amenity que se relaciona con el campo many2one del modelo Student #si no existe este nombre se crea por defecto,  #por lo general estos son parametros opcionales
         string="Amenities", 
         domain="[('active', '=', True)]",
         help="Select hostel room amenities"

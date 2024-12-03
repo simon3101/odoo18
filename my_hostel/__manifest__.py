@@ -11,12 +11,14 @@
         "security/hostel_security.xml",
         "security/ir.model.access.csv",
         "data/data.xml",
-        "views/actions.xml",
+        "views/res_partner.xml",
         "views/hostel_view.xml",
         "views/room_view.xml",
         "views/student_view.xml",
         "views/amenitie.xml",
         "views/categoy_view.xml",
+        "views/room_copy.xml",
+        "views/actions.xml",
         "views/menus.xml"
 	],
     'assets': {
