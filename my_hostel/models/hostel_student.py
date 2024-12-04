@@ -4,10 +4,12 @@ from odoo import models, fields
 class HostelStudent(models.Model):
     _name = "hostel.student"
     _description = "Student model"
-    name = fields.Char(
-        string="Student Name",
-        help="Name of the student"
-    )
+    _inherits = {'res.partner': 'partner_id'}
+# name = fields.Char(
+    #     string="Student Name",
+    #     help="Name of the student"
+    # )
+    
     gender = fields.Selection(
         [
             ("male", "Male"),
@@ -36,3 +38,5 @@ class HostelStudent(models.Model):
         string="Hostal", 
         related='room_id.hostel_id'
     )
+
+    partner_id = fields.Many2one('res.partner',string="Partner",ondelete='cascade')
