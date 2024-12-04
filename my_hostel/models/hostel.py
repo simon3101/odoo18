@@ -83,7 +83,5 @@ class Hostel(models.Model):
 
 	@api.model
 	def _referencable_models(self):
-		modelos = self.env['ir.model'].search([
-		('field_id.name', '=', 'message_ids')
-		])
+		modelos = self.env['ir.model'].search([('field_id.name', '=', 'message_ids')])
 		return [(x.name, x.model) for x in modelos]

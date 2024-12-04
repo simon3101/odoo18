@@ -9,6 +9,8 @@
                 <sheet>
                     <group>
                         <field name="hostel_id"/>
+                        <field name="active"/>
+                        <!--  como vemos aca el active no esta en el modelo original pero si en el abstrac model que creamos -->
                         <field name="name"/>
                         <field name="roomNo"/>
                         <field name="floorNo"/>  

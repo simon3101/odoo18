@@ -9,6 +9,7 @@ class HostelRoom(models.Model):
     #Esto que sigue son validades A nivel de SQL que puede tomar el programa
     _sql_constraints = [("room_no_unique", "unique(room_no)", "Room number must beunique!")]
     #("name", "Codigo sql", "Mensaje que mostrara")
+    _inherit = ['base.archive']
     
 
     #Aca la relacion es de, muchas habitaciones que tiene un hotel (many), hay solo un hotel, por lo tanto el campo es Many2one
