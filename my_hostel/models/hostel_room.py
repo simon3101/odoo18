@@ -1,6 +1,9 @@
 from odoo import fields, models, api
 from odoo.exceptions import ValidationError
 from datetime import timedelta
+# cap 5.2
+from odoo.exceptions import UserError
+from odoo.tools.translate import _
 
 class HostelRoom(models.Model):
 
@@ -55,6 +58,21 @@ class HostelRoom(models.Model):
     duration = fields.Integer("Duration", compute="_compute_check_duration", inverse="_inverse_duration",help="insert duration")
     
     authored_book_ids = fields.Many2many("res.partner")
+    # Cap 4
+    state = fields.Selection([
+        ('draft', 'No available'),
+        ('available', 'Available'),
+        ('closed', 'Closed')],
+        string='Estado', 
+        default='draft'
+    )
+    # cap 5.3
+    def log_all_room_members(self):
+        # Este es un conjunto de registros vacío del modelo hostel.room.member
+        hostel_room_obj = self.env['hostel.room.members']
+        all_members = hostel_room_obj.search([])
+        print("TODOS LOS MIEMBROS:", all_members)
+        return True
 
     @api.depends("student_per_room", "student_ids")
     def _compute_check_availability(self):
@@ -82,3 +100,35 @@ class HostelRoom(models.Model):
                 duration = (stu.discharge_date - stu.admission_date).days
                 if duration != stu.duration:
                     stu.discharge_date = (stu.admission_date + timedelta(days=stu.duration)).strftime('%Y-%m-%d')        
+    # Cap 5
+    @api.model
+    def is_allowed_transition(self, old_state, new_state):
+        allowed = [
+            ('draft', 'available'),
+            ('available', 'closed'),
+            ('closed', 'draft')
+        ]
+        print(old_state,new_state)
+        return (old_state, new_state) in allowed
+
+    def change_state(self, new_state):
+        # con esta funcion pasamos de un estado a otro
+        for room in self:
+            print(room)
+            # esto nos dice, aca estamos en el registro con id = 3
+            if room.is_allowed_transition(room.state, new_state): # si la condicion existe entonces sigue
+                print(room.state) # draft
+                room.state = new_state # este sera el nuevo estado por defecto
+                print(room.state) # available o clased (dependiendo de lo que elija el usuario)
+            else:
+                # room.is_allowed_transition(room.state, new_state) si este es false arrojara este error
+                # Cap 5.2
+                msg = _('Moving from %s to %s is not allowed') % (room.state, new_state)
+                raise UserError(msg)
+
+    def make_available(self):
+        self.change_state('available')
+
+    def make_closed(self):
+        self.change_state('closed')
+

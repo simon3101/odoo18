@@ -13,7 +13,7 @@
         "data/data.xml",
         "views/res_partner.xml",
         "views/hostel_view.xml",
-        "views/room_view.xml",
+        "views/room_view.xml",  
         "views/student_view.xml",
         "views/amenitie.xml",
         "views/categoy_view.xml",
