@@ -68,7 +68,7 @@ class Hostel(models.Model):
 	#Campo de referencia computado
 	ref_doc_id = fields.Reference(
 	selection='_referencable_models',
-	string='Documento de referencia'
+	string='Reference document'
 	)
 
 	@api.depends('hostel_code')
