@@ -45,7 +45,6 @@ class HostelRoom(models.Model):
         domain="[('active', '=', True)]",
         help="Select hostel room amenities"
     )
-
     
     #campo que tendra el numero de estudiantes que cabran por habitacion
     student_per_room = fields.Integer("Students per Room", required=True, help="Room student assignment")
@@ -63,7 +62,7 @@ class HostelRoom(models.Model):
         ('draft', 'No available'),
         ('available', 'Available'),
         ('closed', 'Closed')],
-        string='Estado', 
+        string='State', 
         default='draft'
     )
     # cap 5.3
@@ -74,6 +73,11 @@ class HostelRoom(models.Model):
         print("TODOS LOS MIEMBROS:", all_members)
         return True
 
+    # cap 5.5 
+    def update_room_no(self):
+        self.ensure_one()  # Asegura que solo se esté trabajando con un registro.
+        self.roomNo = "002"
+    
     @api.depends("student_per_room", "student_ids")
     def _compute_check_availability(self):
         """Método para comprobar la disponibilidad de la habitación"""
@@ -84,7 +88,7 @@ class HostelRoom(models.Model):
     def _check_rent_amount(self):
         """Restricción para monto de alquiler negativo"""
         if self.rent_amount < 0:
-            raise ValidationError(("¡El monto de alquiler mensual no debe ser negativo!"))
+            raise ValidationError(("the month rent amount can't be negative!"))
 
 #este decorador calculara la duracion del estudiante, en base a si fecha de admision y la fecha de salida
     @api.depends("admission_date", "discharge_date")

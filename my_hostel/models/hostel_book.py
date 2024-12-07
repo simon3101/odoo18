@@ -3,7 +3,7 @@ from odoo import models,fields,api
 class ResPartner(models.Model):
     _inherit = "res.partner"
     
-    is_hostel_rector = fields.Boolean("Hoster rector",help="Activar si la siguiente persona es rector de hostel")
+    is_hostel_rector = fields.Boolean("Hoster rector",help="Activate is the next person is the hostel's rector")
     #Aca estamos asignando muchos libros a muchas habitaciones
     assign_room_ids = fields.Many2many(comodel_name='hostel.room', string='Hostel room')#esto no tendria mucho sentido ponerlo asi, pero se hace nomas para testeo
     #Aca calculamos con el meto _compute_count_room, la cantidad de libros asignado a la sala

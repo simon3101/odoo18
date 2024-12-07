@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-19 22:48+0000\n"
-"PO-Revision-Date: 2024-11-19 22:48+0000\n"
+"POT-Creation-Date: 2024-12-07 20:17+0000\n"
+"PO-Revision-Date: 2024-12-07 20:17+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,9 +16,193 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: my_hostel
+#: model:ir.model,name:my_hostel.model_base_archive
+msgid "Abstract Model base archive"
+msgstr "Modelo abstracto archivo base"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_student__is_hostel_rector
+#: model:ir.model.fields,help:my_hostel.field_res_partner__is_hostel_rector
+#: model:ir.model.fields,help:my_hostel.field_res_users__is_hostel_rector
+msgid "Activate is the next person is the hostel's rector"
+msgstr "Activar si la siguiente persona es rector del hotel"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_student__active
+msgid "Activate or deactivate the hostel record"
+msgstr "Activar o Desactivar el registro del hotel"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_amenities__active
+msgid "Activate or deactivate this amenity"
+msgstr "Activar/Desactivar este servicio"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_hostel__active
+msgid "Activate/Deactivate hostel record"
+msgstr "Activar/Desactivar Registro Hotel"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_base_archive__active
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_amenities__active
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__active
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__active
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__active
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__active
+msgid "Active"
+msgstr "Activar"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__active_lang_count
+msgid "Active Lang Count"
+msgstr "Activar contador de idioma"
+
+#. module: my_hostel
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_room_form_view
+msgid "Actualizar Número de Habitación"
+msgstr "Actulizar Numero de Habitacion"
+
+#. module: my_hostel
 #: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
 msgid "Address"
 msgstr "Dirección"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__type
+msgid "Address Type"
+msgstr "Typo de Direccion"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__admission_date
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__admission_date
+msgid "Admission Date"
+msgstr "Fecha de Admision"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_room__admission_date
+#: model:ir.model.fields,help:my_hostel.field_hostel_room_copy__admission_date
+msgid "Admission Hostal's Date"
+msgstr "Fecha de admision al Hotel"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_student__lang
+msgid ""
+"All the emails and documents sent to this contact will be translated in this"
+" language."
+msgstr "Todos los correos y documentos enviados a este contacto seran traducidos en este lenguaje"
+
+#. module: my_hostel
+#: model:ir.ui.menu,name:my_hostel.amenitie_menu
+msgid "Amenitie"
+msgstr "Servicio"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__hostel_amenities_ids
+msgid "Amenities"
+msgstr "Servicios"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__authored_book_ids
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__authored_book_ids
+msgid "Authored Book"
+msgstr "Libro Autorizado"
+
+#. module: my_hostel
+#: model:ir.model.fields.selection,name:my_hostel.selection__hostel_room__state__available
+#: model:ir.model.fields.selection,name:my_hostel.selection__hostel_room_copy__state__available
+msgid "Available"
+msgstr "Disponible"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__availability
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__availability
+msgid "Avalaibility"
+msgstr "Diponibilidad"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_room__availability
+#: model:ir.model.fields,help:my_hostel.field_hostel_room_copy__availability
+msgid "Avalaibility hostal's room"
+msgstr "Diponibilidad de la habitacion del hotel"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__avatar_1920
+msgid "Avatar"
+msgstr "Imagen del Perfil"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__avatar_1024
+msgid "Avatar 1024"
+msgstr "Imagen de perfil 1024"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__avatar_128
+msgid "Avatar 128"
+msgstr "Imagen de perfil 128"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__avatar_256
+msgid "Avatar 256"
+msgstr "Imagen de perfil 256"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__avatar_512
+msgid "Avatar 512"
+msgstr "Imagen de perfil 512"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__bank_ids
+msgid "Banks"
+msgstr "Bancos"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__barcode
+msgid "Barcode"
+msgstr "Codigo de barra"
+
+#. module: my_hostel
+#: model:ir.model.fields.selection,name:my_hostel.selection__hostel_hostel__type__male
+msgid "Boys"
+msgstr "Chicos"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__category_id
+#: model:ir.ui.menu,name:my_hostel.category_menu
+msgid "Category"
+msgstr "Categoria"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_category__name
+msgid "Category Name"
+msgstr "Nombre de Categoria"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_student__is_company
+msgid "Check if the contact is a company, otherwise it is a person"
+msgstr "Verificar si el contacto es una compañia, de otra manera es una persona"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_student__employee
+msgid "Check this box if this contact is an Employee."
+msgstr "Verificar si la caja en este contacto es un empleado"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_category__child_ids
+msgid "Child Categories"
+msgstr "Categorias Hijo"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__city
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__city
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
+msgid "City"
+msgstr "Ciudad"
+
+#. module: my_hostel
+#: model:ir.model.fields.selection,name:my_hostel.selection__hostel_room__state__closed
+#: model:ir.model.fields.selection,name:my_hostel.selection__hostel_room_copy__state__closed
+msgid "Closed"
+msgstr "Cerrado"
 
 #. module: my_hostel
 #: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__hostel_code
@@ -27,24 +211,191 @@ msgid "Code"
 msgstr "Código"
 
 #. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__color
+msgid "Color Index"
+msgstr "Indice de color"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__commercial_partner_id
+msgid "Commercial Entity"
+msgstr "Entidad comercial"
+
+#. module: my_hostel
+#: model:ir.model.fields.selection,name:my_hostel.selection__hostel_hostel__type__common
+msgid "Common"
+msgstr "Comunes"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__company_id
+msgid "Company"
+msgstr "Compañia"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__company_registry
+msgid "Company ID"
+msgstr "Ip de compañia"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__company_name
+msgid "Company Name"
+msgstr "Nombre de compañia"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__commercial_company_name
+msgid "Company Name Entity"
+msgstr "Nombre de la entidad de la compañia"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__company_type
+msgid "Company Type"
+msgstr "Tipo de compañia"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__contact_address
+msgid "Complete Address"
+msgstr "Dirección completa"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__complete_name
+msgid "Complete Name"
+msgstr "Nombre completo"
+
+#. module: my_hostel
+#: model:ir.model,name:my_hostel.model_res_partner
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__child_ids
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__country_id
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__country_id
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
+msgid "Country"
+msgstr "Pais"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__country_code
+msgid "Country Code"
+msgstr "Codigo Postal"
+
+#. module: my_hostel
 #: model_terms:ir.actions.act_window,help:my_hostel.action_hostel
 msgid "Create Hostel."
 msgstr "Crear un Hotel"
 
 #. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_amenities__create_uid
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_category__create_uid
 #: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__create_uid
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__create_uid
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__create_uid
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_members__create_uid
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__create_uid
 msgid "Created by"
 msgstr "Creado por"
 
 #. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_amenities__create_date
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_category__create_date
 #: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__create_date
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__create_date
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__create_date
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_members__create_date
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__create_date
 msgid "Created on"
 msgstr "Creado el"
 
 #. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__currency_id
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__currency_id
+msgid "Currency"
+msgstr "Denominacion"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_category__description
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__description
+msgid "Description"
+msgstr "Descripción"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_amenities__display_name
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_category__display_name
 #: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__display_name
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__display_name
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__display_name
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_members__display_name
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__display_name
 msgid "Display Name"
 msgstr "Nombre a mostrar"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__duration
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__duration
+msgid "Duration"
+msgstr "Duración"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_student__partner_share
+msgid ""
+"Either customer (not a user), either shared user. Indicated the current "
+"partner is a customer without access or with a limited access created for "
+"sharing data."
+msgstr "Ya sea un cliente (no un usuario) o un usuario compartido. Se indica que el "
+"socio actual es un cliente sin acceso o con un acceso limitado creado para "
+"compartir datos."
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__email
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__email
+msgid "Email"
+msgstr "Correo"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__employee
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_room__rent_amount
+#: model:ir.model.fields,help:my_hostel.field_hostel_room_copy__rent_amount
+msgid "Enter a rent amount per month"
+msgstr "Introduzca un importe de alquiler por mes"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_hostel__other_info
+msgid "Enter more information"
+msgstr "Introduzca mas Información"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_room__student_ids
+#: model:ir.model.fields,help:my_hostel.field_hostel_room_copy__student_ids
+msgid "Enter students"
+msgstr "Introduzca estudiantes"
+
+#. module: my_hostel
+#: model:ir.model.fields.selection,name:my_hostel.selection__hostel_student__gender__female
+msgid "Female"
+msgstr "Femenino
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__floorNo
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__floorNo
+msgid "Floor No"
+msgstr "Numero de Piso"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_student__email_formatted
+msgid "Format email address \"Name <email@domain>\""
+msgstr "Formato de dirección de correo electrónico"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__email_formatted
+msgid "Formatted Email"
+msgstr "Correo formateado"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__gender
+msgid "Gender"
+msgstr "Genero"
 
 #. module: my_hostel
 #: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
@@ -52,22 +403,67 @@ msgid "General"
 msgstr "General"
 
 #. module: my_hostel
-#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
-msgid "General 3"
-msgstr "General 3"
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_category_form
+msgid "Generate Dummy Categories"
+msgstr "Generar Categorias ficticias"
 
 #. module: my_hostel
-#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
-msgid "General2"
-msgstr "General 2"
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__partner_latitude
+msgid "Geo Latitude"
+msgstr "Geolocalización de latitud"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__partner_longitude
+msgid "Geo Longitude"
+msgstr "Geolocalización de longitud"
+
+#. module: my_hostel
+#: model:ir.model.fields.selection,name:my_hostel.selection__hostel_hostel__type__female
+msgid "Girls"
+msgstr "Chicas"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__hostel_id
+msgid "Hostal"
+msgstr "Hotel"
 
 #. module: my_hostel
 #: model:ir.actions.act_window,name:my_hostel.action_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__hostel_id
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__hostel_id
 #: model:ir.ui.menu,name:my_hostel.hostel_main_menu
 #: model:ir.ui.menu,name:my_hostel.hostel_type_menu
 #: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
 msgid "Hostel"
 msgstr "Hotel"
+
+#. module: my_hostel
+#: model:ir.actions.act_window,name:my_hostel.action_hostel_four
+msgid "Hostel Amenitie"
+msgstr "Servicio del hotel"
+
+#. module: my_hostel
+#: model:ir.model,name:my_hostel.model_hostel_amenities
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__hostel_amenities_ids
+msgid "Hostel Amenities"
+msgstr "Servicios del hotel"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__hostel_rating
+msgid "Hostel Average Rating"
+msgstr "Calificación promedio del hotel"
+
+#. module: my_hostel
+#: model:ir.actions.act_window,name:my_hostel.action_hostel_five
+#: model:ir.actions.act_window,name:my_hostel.action_hostel_six
+#: model:ir.model,name:my_hostel.model_hostel_category
+msgid "Hostel Category"
+msgstr "Categoría del hotel"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__image
+msgid "Hostel Image"
+msgstr "Imagen del Hotel"
 
 #. module: my_hostel
 #: model:ir.module.category,name:my_hostel.module_category_hostel
@@ -80,9 +476,48 @@ msgid "Hostel Manager"
 msgstr "Gerente de Hotel"
 
 #. module: my_hostel
+#: model:ir.actions.act_window,name:my_hostel.action_hostel_two
+msgid "Hostel Room"
+msgstr "Habitación del hotel"
+
+#. module: my_hostel
+#: model:ir.model,name:my_hostel.model_hostel_room_copy
+msgid "Hostel Room Information Copy"
+msgstr "Informacion Copiado de la habitacion del hotel"
+
+#. module: my_hostel
+#: model:ir.actions.act_window,name:my_hostel.action_hostel_three
+msgid "Hostel Student"
+msgstr "Estudiante del hotel"
+
+#. module: my_hostel
 #: model:res.groups,name:my_hostel.group_hostel_user
 msgid "Hostel User"
 msgstr "Usuario del Hotel"
+
+#. module: my_hostel
+#: model:ir.ui.menu,name:my_hostel.hostel_copy
+msgid "Hostel copy"
+msgstr "Copia del Hotel"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__assign_room_ids
+#: model:ir.model.fields,field_description:my_hostel.field_res_partner__assign_room_ids
+#: model:ir.model.fields,field_description:my_hostel.field_res_users__assign_room_ids
+msgid "Hostel room"
+msgstr "Habitacion del Hotel"
+
+#. module: my_hostel
+#: model:ir.model,name:my_hostel.model_hostel_room
+msgid "Hostel room model"
+msgstr "Modelo de la Habitación del hotel"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__is_hostel_rector
+#: model:ir.model.fields,field_description:my_hostel.field_res_partner__is_hostel_rector
+#: model:ir.model.fields,field_description:my_hostel.field_res_users__is_hostel_rector
+msgid "Hoster rector"
+msgstr "Recto del Hotel"
 
 #. module: my_hostel
 #: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__name
@@ -90,9 +525,45 @@ msgid "Hotel Name"
 msgstr "Nombre del Hotel"
 
 #. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_amenities__id
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_category__id
 #: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__id
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__id
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__id
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_members__id
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__id
 msgid "ID"
 msgstr "Identificador"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__image_1920
+msgid "Image"
+msgstr "Imagen"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__image_1024
+msgid "Image 1024"
+msgstr "Imagen 1024"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__image_128
+msgid "Image 128"
+msgstr "Imagen 128"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__image_256
+msgid "Image 256"
+msgstr "Imagen 256"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__image_512
+msgid "Image 512"
+msgstr "Imagen 512"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__industry_id
+msgid "Industry"
+msgstr "Industria"
 
 #. module: my_hostel
 #: model:ir.model,name:my_hostel.model_hostel_hostel
@@ -100,27 +571,272 @@ msgid "Information about hostel"
 msgstr "Informacion acerca del Hotel"
 
 #. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__is_public
+msgid "Is Public"
+msgstr "Es publico"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__is_company
+msgid "Is a Company"
+msgstr "Es una compañia"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__function
+msgid "Job Position"
+msgstr "Cargo del empleo"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__lang
+msgid "Language"
+msgstr "lenguaje"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_amenities__write_uid
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_category__write_uid
 #: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__write_uid
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__write_uid
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__write_uid
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_members__write_uid
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__write_uid
 msgid "Last Updated by"
 msgstr "Ultima actualización por"
 
 #. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_amenities__write_date
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_category__write_date
 #: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__write_date
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__write_date
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__write_date
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_members__write_date
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__write_date
 msgid "Last Updated on"
 msgstr "Fecha de ultima actualización"
 
 #. module: my_hostel
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_room_form_view
+msgid "Log Members"
+msgstr "Logueo de Miembros"
+
+#. module: my_hostel
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_room_form_view
+msgid "Make Close"
+msgstr "Hacer cierre"
+
+#. module: my_hostel
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_room_form_view
+msgid "Make available"
+msgstr "Hacer disponible"
+
+#. module: my_hostel
+#: model:ir.model.fields.selection,name:my_hostel.selection__hostel_student__gender__male
+msgid "Male"
+msgstr "Masculino"
+
+#. module: my_hostel
+#: model:ir.model,name:my_hostel.model_hostel_room_members
+msgid "Members of the hostel"
+msgstr "Miembros del hotel"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__mobile
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__mobile
+msgid "Mobile"
+msgstr "Celular"
+
+#. module: my_hostel
+#. odoo-python
+#: code:addons/my_hostel/models/hostel_room.py:0
+msgid "Moving from %s to %s is not allowed"
+msgstr "Mover de %s a %s no esta permitido"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_amenities__name
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__name
 #: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
 msgid "Name"
 msgstr "Nombre"
 
 #. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_category__name
+msgid "Name of the category"
+msgstr "Nombre de la categoría"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_amenities__name
+msgid "Name of the hostel amenity provided"
+msgstr "Nombre del servicio que ofrece el albergue"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_room__hostel_id
+#: model:ir.model.fields,help:my_hostel.field_hostel_room_copy__hostel_id
+#: model:ir.model.fields,help:my_hostel.field_hostel_student__hostel_id
+msgid "Name of the hostell"
+msgstr "Nombre del albergue"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_members__name
+msgid "Name of the member"
+msgstr "Nombre del miembro"
+
+#. module: my_hostel
+#: model:ir.model.fields.selection,name:my_hostel.selection__hostel_room__state__draft
+#: model:ir.model.fields.selection,name:my_hostel.selection__hostel_room_copy__state__draft
+msgid "No available"
+msgstr "No disponible"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__comment
+msgid "Notes"
+msgstr "Notas"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__count_assign_room
+#: model:ir.model.fields,field_description:my_hostel.field_res_partner__count_assign_room
+#: model:ir.model.fields,field_description:my_hostel.field_res_users__count_assign_room
+msgid "Number of room assigned"
+msgstr "Numero de habitaciones asignadas"
+
+#. module: my_hostel
+#: model:ir.model.fields.selection,name:my_hostel.selection__hostel_student__gender__other
+msgid "Other"
+msgstr "Otro/Otra"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__other_info
+msgid "Other Information"
+msgstr "Otra Información"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_category__parent_id
+msgid "Parent Category"
+msgstr "Categoría Padre"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_category__parent_path
+msgid "Parent Path"
+msgstr "Ruta del Padre"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_category__parent_id
+msgid "Parent category in the hierarchy"
+msgstr "Categoría padre en la jerarquía"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__parent_name
+msgid "Parent name"
+msgstr "Nombre del Padre"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__partner_id
+msgid "Partner"
+msgstr "Socio"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__same_company_registry_partner_id
+msgid "Partner with same Company Registry"
+msgstr "Socio con el mismo Registro de Empresa"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__same_vat_partner_id
+msgid "Partner with same Tax ID"
+msgstr "Socio con el mismo número de identificación fiscal"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__phone
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__phone
+msgid "Phone"
+msgstr "Telefono"
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__ref
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__ref_doc_id
+msgid "Reference document"
+msgstr "Documento de referencia"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__parent_id
+msgid "Related Company"
+msgstr "Compañia Relacionada"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__rent_amount
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__rent_amount
+msgid "Rent Amount"
+msgstr "Monto de alquiler"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__room_id
+#: model:ir.ui.menu,name:my_hostel.room_form_menu
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_room_form_view
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_room_view
+msgid "Room"
+msgstr "Habitación"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__name
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__name
+msgid "Room Name"
+msgstr "Nombre de Habitación"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__roomNo
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__roomNo
+msgid "Room No"
+msgstr "Número de Habitación"
+
+#. module: my_hostel
+#: model:ir.model.constraint,message:my_hostel.constraint_hostel_room_copy_room_no_unique
+#: model:ir.model.constraint,message:my_hostel.constraint_hostel_room_room_no_unique
+msgid "Room number must beunique!"
+msgstr "¡El número de habitación debe ser único!"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_room__student_per_room
+#: model:ir.model.fields,help:my_hostel.field_hostel_room_copy__student_per_room
+msgid "Room student assignment"
+msgstr "Asignación de habitación a los estudiantes"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__user_id
+msgid "Salesperson"
+msgstr "Persona de venta"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_room__hostel_amenities_ids
+#: model:ir.model.fields,help:my_hostel.field_hostel_room_copy__hostel_amenities_ids
+msgid "Select hostel room amenities"
+msgstr "Seleccione las comodidades de la habitación del albergue"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_student__room_id
+msgid "Select the hostel room"
+msgstr "Seleccionar la habitación del hotel"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__self
+msgid "Self"
+msgstr "A si mismo"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__partner_share
+msgid "Share Partner"
+msgstr "Compartir Socio"
+
+#. module: my_hostel
 #: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__state_id
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__state
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__state
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__state_id
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
 msgid "State"
 msgstr "Estado"
 
 #. module: my_hostel
 #: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__street
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__street
 msgid "Street"
 msgstr "Calle"
 
@@ -136,5 +852,163 @@ msgstr "Calle ..."
 
 #. module: my_hostel
 #: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__street2
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__street2
 msgid "Street2"
 msgstr "Calle 2"
+
+#. module: my_hostel
+#: model:ir.ui.menu,name:my_hostel.student_menu
+msgid "Student"
+msgstr "Estudiante"
+
+#. module: my_hostel
+#: model:ir.model,name:my_hostel.model_hostel_student
+msgid "Student model"
+msgstr "Modelo Estudiante"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_student__gender
+msgid "Student's gender"
+msgstr "Genero de Estudiante"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__student_ids
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__student_ids
+msgid "Students"
+msgstr "Estudiantes"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__student_per_room
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__student_per_room
+msgid "Students per Room"
+msgstr "Estudiantes por habitación"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_category__child_ids
+msgid "Subcategories of this category"
+msgstr "Subcategorias de esta categoría"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__category_id
+msgid "Tags"
+msgstr "Etiquetas"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__vat
+msgid "Tax ID"
+msgstr "Id de impuesto"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_student__country_code
+msgid ""
+"The ISO country code in two chars. \n"
+"You can use this field for quick search."
+msgstr "El código ISO del país en dos caracteres. \n
+"Puede utilizar este campo para realizar una búsqueda rápida".
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_student__vat
+msgid ""
+"The Tax Identification Number. Values here will be validated based on the "
+"country format. You can use '/' to indicate that the partner is not subject "
+"to tax."
+msgstr "El número de identificación fiscal. Los valores aquí se validarán según el formato del país. Puede utilizar '/' para indicar que el socio no está sujeto a impuestos".
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_student__user_id
+msgid "The internal user in charge of this contact."
+msgstr "El usuario interno responsable de este contacto."
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_student__company_registry
+msgid ""
+"The registry number of the company. Use it if it is different from the Tax "
+"ID. It must be unique across all partners of a same country"
+msgstr ""
+"El número de registro de la empresa. Utilícelo si es diferente del número de identificación fiscal. Debe ser único entre todos los socios de un mismo país"
+msgstr ""
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__tz
+msgid "Timezone"
+msgstr "Zona horaria"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__tz_offset
+msgid "Timezone offset"
+msgstr "Desplazamiento de zona horaria"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__title
+msgid "Title"
+msgstr "Título"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__hostel_floors
+msgid "Total Floors"
+msgstr "Pisos totales"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__type
+msgid "Type"
+msgstr "Tipo"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_hostel__type
+msgid "Type of Hostel"
+msgstr "Tipo de hotel"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__discharge_date
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__discharge_date
+msgid "Up date"
+msgstr "Fecha de salida"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_room__discharge_date
+#: model:ir.model.fields,help:my_hostel.field_hostel_room_copy__discharge_date
+msgid "Up student's Date"
+msgstr "Fecha de subida del estudiante"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_student__barcode
+msgid "Use a barcode to identify this contact."
+msgstr "Utilice un código de barras para identificar este contacto".
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__user_ids
+msgid "Users"
+msgstr "Usuarios"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__website
+msgid "Website Link"
+msgstr "Sitio web enlazado"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_student__tz
+msgid ""
+"When printing documents and exporting/importing data, time values are computed according to this timezone.\n"
+"If the timezone is not set, UTC (Coordinated Universal Time) is used.\n"
+"Anywhere else, time values are computed according to the time offset of your web client."
+msgstr ""
+"Al imprimir documentos y exportar/importar datos, los valores de tiempo se calculan de acuerdo con esta zona horaria.\n"
+"Si no se establece la zona horaria, se utiliza UTC (Tiempo Universal Coordinado).\n"
+"En cualquier otro lugar, los valores de tiempo se calculan de acuerdo con la diferencia horaria de su cliente web"
+
+#. module: my_hostel
+#: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
+msgid "ZIP"
+msgstr "ZIP"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__zip
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__zip
+msgid "Zip"
+msgstr "Zip"
+
+#. module: my_hostel
+#: model:ir.model.fields,help:my_hostel.field_hostel_room__duration
+#: model:ir.model.fields,help:my_hostel.field_hostel_room_copy__duration
+msgid "insert duration"
+msgstr "Insertar duracion"

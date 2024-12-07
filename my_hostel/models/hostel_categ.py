@@ -8,11 +8,8 @@ class HostelCategory(models.Model):
     _parent_name = "parent_id" # optional if field is 'parent_id'
     
 
-    name = fields.Char(
-        string="Category Name", 
-        required=True, 
-        help="Name of the category"
-    )
+    name = fields.Char(string="Category Name", required=True, help="Name of the category")
+    description = fields.Text('Description')
     parent_id = fields.Many2one(
         comodel_name="hostel.category",
         string="Parent Category",
@@ -20,10 +17,7 @@ class HostelCategory(models.Model):
         index=True,# esto es para ser indexado en la base de datos, por defecto no lo esta, si lo esta es mas rapido consultar
         help="Parent category in the hierarchy"
     )
-    parent_path = fields.Char(
-        index=True, 
-        unaccent=False
-    )
+    parent_path = fields.Char(index=True, unaccent=False)
 
     child_ids = fields.One2many(
         comodel_name="hostel.category",
@@ -32,6 +26,29 @@ class HostelCategory(models.Model):
         help="Subcategories of this category"
     )
     
+    # Método para generar categorías ficticias
+    def create_categories(self):
+        # Diccionario con los valores de la primera subcategoría
+        categ1 = {
+            'name': 'Child category 1',
+            'description': 'Description for child 1'
+        }
+        # Diccionario con los valores de la segunda subcategoría
+        categ2 = {
+            'name': 'Child category 2',
+            'description': 'Description for child 2'
+        }
+        # Diccionario con los valores de la categoría principal
+        parent_category_val = {
+            'name': 'Parent category',
+            'description': 'Description for parent category',
+            'child_ids': [
+                (0, 0, categ1),
+                (0, 0, categ2),
+            ]
+        }
+        record = self.create(parent_category_val)
+        return record
 
     @api.constrains('parent_id')
     def _check_hierarchy(self):
