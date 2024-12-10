@@ -65,6 +65,24 @@ class HostelRoom(models.Model):
         string='State', 
         default='draft'
     )
+
+    category_id = fields.Many2one('hostel.category')
+    # cap 5.6
+    def find_room(self):
+        print(self.category_id.name)
+        domain = [
+            '|',  # Operador lógico OR
+                '&',  # Operador lógico AND
+                    ('name', 'ilike', 'Room Name'),
+                    ('category_id.name', "ilike", 'Child'),
+                '&',
+                    ('name', 'ilike', 'Second Room Name 2'),
+                    ('category_id.name', "ilike", 'Child'),
+        ]
+
+        rooms = self.search(domain)
+        print("Habitaciones encontradas:", rooms)
+        return rooms
     # cap 5.3
     def log_all_room_members(self):
         # Este es un conjunto de registros vacío del modelo hostel.room.member

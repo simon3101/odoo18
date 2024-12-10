@@ -396,7 +396,7 @@ msgstr "Correo formateado"
 #: model:ir.model.fields,field_description:my_hostel.field_hostel_student__gender
 msgid "Gender"
 msgstr "Genero"
-
+""
 #. module: my_hostel
 #: model_terms:ir.ui.view,arch_db:my_hostel.view_hostel_form_view
 msgid "General"
@@ -903,8 +903,8 @@ msgstr "Id de impuesto"
 msgid ""
 "The ISO country code in two chars. \n"
 "You can use this field for quick search."
-msgstr "El código ISO del país en dos caracteres. \n
-"Puede utilizar este campo para realizar una búsqueda rápida".
+msgstr "El código ISO del país en dos caracteres."
+"Puede utilizar este campo para realizar una búsqueda rápida"
 
 #. module: my_hostel
 #: model:ir.model.fields,help:my_hostel.field_hostel_student__vat
@@ -912,7 +912,7 @@ msgid ""
 "The Tax Identification Number. Values here will be validated based on the "
 "country format. You can use '/' to indicate that the partner is not subject "
 "to tax."
-msgstr "El número de identificación fiscal. Los valores aquí se validarán según el formato del país. Puede utilizar '/' para indicar que el socio no está sujeto a impuestos".
+msgstr "El número de identificación fiscal. Los valores aquí se validarán según el formato del país. Puede utilizar '/' para indicar que el socio no está sujeto a impuestos"
 
 #. module: my_hostel
 #: model:ir.model.fields,help:my_hostel.field_hostel_student__user_id
@@ -926,7 +926,6 @@ msgid ""
 "ID. It must be unique across all partners of a same country"
 msgstr ""
 "El número de registro de la empresa. Utilícelo si es diferente del número de identificación fiscal. Debe ser único entre todos los socios de un mismo país"
-msgstr ""
 
 #. module: my_hostel
 #: model:ir.model.fields,field_description:my_hostel.field_hostel_student__tz
@@ -973,7 +972,7 @@ msgstr "Fecha de subida del estudiante"
 #. module: my_hostel
 #: model:ir.model.fields,help:my_hostel.field_hostel_student__barcode
 msgid "Use a barcode to identify this contact."
-msgstr "Utilice un código de barras para identificar este contacto".
+msgstr "Utilice un código de barras para identificar este contacto"
 
 #. module: my_hostel
 #: model:ir.model.fields,field_description:my_hostel.field_hostel_student__user_ids

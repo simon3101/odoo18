@@ -11,7 +11,8 @@
                     <button name="make_available" string="Make available" type="object"/>
                     <button name="make_closed" string="Make Close" type="object"/>
                     <button name="log_all_room_members" string="Log Members" type="object"/>
-                    <button name="update_room_no" string="Actualizar Número de Habitación" type="object"/>
+                    <button name="update_room_no" string="Update room number" type="object"/>
+                    <button name="find_room" string="Find room" type="object"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -33,6 +34,7 @@
                         <!-- podemos este campo de duration para que solo se visualice -->
                         <field name="duration" readonly="1"/>
                         <field name="authored_book_ids"/>
+                        <field name="category_id"/>d
                     </group>  
                 </sheet>
             </form>
