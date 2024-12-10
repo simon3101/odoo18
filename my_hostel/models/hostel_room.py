@@ -1,9 +1,13 @@
+import logging
+
 from odoo import fields, models, api
 from odoo.exceptions import ValidationError
 from datetime import timedelta
 # cap 5.2
 from odoo.exceptions import UserError
 from odoo.tools.translate import _
+
+_logger = logging.getLogger(__name__)
 
 class HostelRoom(models.Model):
 
@@ -74,15 +78,21 @@ class HostelRoom(models.Model):
             '|',  # Operador lógico OR
                 '&',  # Operador lógico AND
                     ('name', 'ilike', 'Room Name'),
-                    ('category_id.name', "ilike", 'Child'),
+                    ('category_id', "ilike", 'Child category 1'),
                 '&',
                     ('name', 'ilike', 'Second Room Name 2'),
-                    ('category_id.name', "ilike", 'Child'),
+                    ('category_id.name', "ilike", 'Child category 2'),
         ]
 
         rooms = self.search(domain)
         print("Habitaciones encontradas:", rooms)
         return rooms
+
+    def combining_records(self):
+        recordset_1 = self.search([("name","ilike",'Room Name')])
+        recordset_2 = self.search([("rent_amount",">=",100)])
+        result = recordset_1 + recordset_2
+        return print(result)
     # cap 5.3
     def log_all_room_members(self):
         # Este es un conjunto de registros vacío del modelo hostel.room.member
@@ -153,4 +163,34 @@ class HostelRoom(models.Model):
 
     def make_closed(self):
         self.change_state('closed')
+    # cap 5.8
+    def filter_members(self):
+        all_rooms = self.search([])
+        filtered_rooms = self.room_with_multiple_members(all_rooms)
+        _logger.info('Filtered Rooms: %s', filtered_rooms)
+        # print(filtered_rooms)
+    
+    @api.model
+    def room_with_multiple_members(self, all_rooms):
+        def predicate(room):
+            if len(room.student_ids) > 1:
+                return True
+            return False
+        return all_rooms.filtered(predicate)
 
+    # def all_rooms_with_category(self):
+    #     all_rooms = self.search([])
+    #     # este solo me retornara todos los
+    #     return print (all_rooms.filtered('category_id'))
+    
+    # def get_amenities_names(self):
+    #     return print(self.mapped('hostel_amenities_ids.name'))
+
+    @api.model
+    def get_amenities_names(self,all_rooms):
+        # print("ola mundo")
+        # print(type(rooms))
+        # print(type(self))
+        # print(self)
+        # print(self)
+        return all_rooms.mapped('name')

@@ -13,6 +13,10 @@
                     <button name="log_all_room_members" string="Log Members" type="object"/>
                     <button name="update_room_no" string="Update room number" type="object"/>
                     <button name="find_room" string="Find room" type="object"/>
+                    <button name="combining_records" string="Combining record" type="object"/>
+                    <button name="filter_members" type="object" string="Filter members"/>
+                    <!-- <button name="all_rooms_with_category" type="object" string="Category_id filter"/> -->
+                    <button name="get_amenities_names" type="object" string="Amenities log"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
