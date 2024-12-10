@@ -1,11 +1,20 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
     <!-- 3er registro - vista form  del hostel room-->
-    <record id="view_hostel_room_view" model="ir.ui.view">
+    <record id="view_hostel_room_form_view" model="ir.ui.view">
         <field name="name"> hostel.room.form.view</field>
         <field name="model">hostel.room</field>
         <field name="arch" type='xml'>
             <form string="Room">
+                <header>
+                    <!-- aca cuando se presioa el boton, estara llamando el metodo make_available  -->
+                    <button name="make_available" string="Make available" type="object"/>
+                    <button name="make_closed" string="Make Close" type="object"/>
+                    <button name="log_all_room_members" string="Log Members" type="object"/>
+                    <button name="update_room_no" string="Update room number" type="object"/>
+                    <button name="find_room" string="Find room" type="object"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
                 <sheet>
                     <group>
                         <field name="hostel_id"/>
@@ -25,6 +34,7 @@
                         <!-- podemos este campo de duration para que solo se visualice -->
                         <field name="duration" readonly="1"/>
                         <field name="authored_book_ids"/>
+                        <field name="category_id"/>d
                     </group>  
                 </sheet>
             </form>
@@ -44,6 +54,7 @@
                 <field name="currency_id"/>
                 <field name="student_ids"/>
                 <field name="hostel_amenities_ids"/>
+                <field name="state" widget="statusbar"/>
             </list>
         </field>
     </record>

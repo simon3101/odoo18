@@ -52,7 +52,7 @@
                             <field name="type"/>
                             <field name="hostel_rating"/>
                             <field name="other_info"/>
-                            <field name="category_id"/>
+                            <!-- <field name="category_id"/> -->
                             <field name="ref_doc_id"/>
                         </group>
                     </group>
@@ -75,7 +75,7 @@
                 <field name="street"/>
                 <field name="email"/>
                 <field name="active"/>
-                <field name="category_id"/>
+                <!-- <field name="category_id"/> -->
                 <field name="ref_doc_id"/>
             </list>
         </field>

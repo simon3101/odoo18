@@ -2,6 +2,7 @@ from odoo import models, fields
 
 class BaseArchive(models.AbstractModel):
     _name = 'base.archive'
+    _description = 'Abstract Model base archive'
 
     active = fields.Boolean(default=True)
 

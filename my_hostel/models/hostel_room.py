@@ -1,6 +1,9 @@
 from odoo import fields, models, api
 from odoo.exceptions import ValidationError
 from datetime import timedelta
+# cap 5.2
+from odoo.exceptions import UserError
+from odoo.tools.translate import _
 
 class HostelRoom(models.Model):
 
@@ -42,7 +45,6 @@ class HostelRoom(models.Model):
         domain="[('active', '=', True)]",
         help="Select hostel room amenities"
     )
-
     
     #campo que tendra el numero de estudiantes que cabran por habitacion
     student_per_room = fields.Integer("Students per Room", required=True, help="Room student assignment")
@@ -55,7 +57,45 @@ class HostelRoom(models.Model):
     duration = fields.Integer("Duration", compute="_compute_check_duration", inverse="_inverse_duration",help="insert duration")
     
     authored_book_ids = fields.Many2many("res.partner")
+    # Cap 4
+    state = fields.Selection([
+        ('draft', 'No available'),
+        ('available', 'Available'),
+        ('closed', 'Closed')],
+        string='State', 
+        default='draft'
+    )
 
+    category_id = fields.Many2one('hostel.category')
+    # cap 5.6
+    def find_room(self):
+        print(self.category_id.name)
+        domain = [
+            '|',  # Operador lógico OR
+                '&',  # Operador lógico AND
+                    ('name', 'ilike', 'Room Name'),
+                    ('category_id.name', "ilike", 'Child'),
+                '&',
+                    ('name', 'ilike', 'Second Room Name 2'),
+                    ('category_id.name', "ilike", 'Child'),
+        ]
+
+        rooms = self.search(domain)
+        print("Habitaciones encontradas:", rooms)
+        return rooms
+    # cap 5.3
+    def log_all_room_members(self):
+        # Este es un conjunto de registros vacío del modelo hostel.room.member
+        hostel_room_obj = self.env['hostel.room.members']
+        all_members = hostel_room_obj.search([])
+        print("TODOS LOS MIEMBROS:", all_members)
+        return True
+
+    # cap 5.5 
+    def update_room_no(self):
+        self.ensure_one()  # Asegura que solo se esté trabajando con un registro.
+        self.roomNo = "002"
+    
     @api.depends("student_per_room", "student_ids")
     def _compute_check_availability(self):
         """Método para comprobar la disponibilidad de la habitación"""
@@ -66,7 +106,7 @@ class HostelRoom(models.Model):
     def _check_rent_amount(self):
         """Restricción para monto de alquiler negativo"""
         if self.rent_amount < 0:
-            raise ValidationError(("¡El monto de alquiler mensual no debe ser negativo!"))
+            raise ValidationError(("the month rent amount can't be negative!"))
 
 #este decorador calculara la duracion del estudiante, en base a si fecha de admision y la fecha de salida
     @api.depends("admission_date", "discharge_date")
@@ -82,3 +122,35 @@ class HostelRoom(models.Model):
                 duration = (stu.discharge_date - stu.admission_date).days
                 if duration != stu.duration:
                     stu.discharge_date = (stu.admission_date + timedelta(days=stu.duration)).strftime('%Y-%m-%d')        
+    # Cap 5
+    @api.model
+    def is_allowed_transition(self, old_state, new_state):
+        allowed = [
+            ('draft', 'available'),
+            ('available', 'closed'),
+            ('closed', 'draft')
+        ]
+        print(old_state,new_state)
+        return (old_state, new_state) in allowed
+
+    def change_state(self, new_state):
+        # con esta funcion pasamos de un estado a otro
+        for room in self:
+            print(room)
+            # esto nos dice, aca estamos en el registro con id = 3
+            if room.is_allowed_transition(room.state, new_state): # si la condicion existe entonces sigue
+                print(room.state) # draft
+                room.state = new_state # este sera el nuevo estado por defecto
+                print(room.state) # available o clased (dependiendo de lo que elija el usuario)
+            else:
+                # room.is_allowed_transition(room.state, new_state) si este es false arrojara este error
+                # Cap 5.2
+                msg = _('Moving from %s to %s is not allowed') % (room.state, new_state)
+                raise UserError(msg)
+
+    def make_available(self):
+        self.change_state('available')
+
+    def make_closed(self):
+        self.change_state('closed')
+

@@ -53,24 +53,12 @@ class Hostel(models.Model):
 	# Creamos un campo flotante, con digitos que pueden tener ciertos numeros de digitos, 14 digitos hasta la izquierda, y 4 hacia la derecha 
 	# hostel_rating = fields.Float('Hostel Average Rating', digits=(14, 4)) Metodo 1
 	hostel_rating = fields.Float('Hostel Average Rating', digits='Rating Value' ) # Metodo 2
-	# other = fields.Char(string='Otro comentario')
-	category_id = fields.Many2one('hostel.category')
-	"""[act1]"""
-	# def write(self, vals):
-	# 	# Lógica personalizada antes de la operación	
-	# 	if 'name' in vals:
-	# 		vals['name'] = vals['name'].upper()
-	# 	# Llama al método original
-	# 	result = super(Hostel, self).write(vals)
-	# 	# Lógica personalizada después de la operación
-	# 	return result
-
-	#Campo de referencia computado
+	
 	ref_doc_id = fields.Reference(
 	selection='_referencable_models',
-	string='Documento de referencia'
+	string='Reference document'
 	)
-
+	# category_id = fields.Many2one('hostel.category')
 	@api.depends('hostel_code')
 	def _compute_display_name(self):
 		for record in self:
