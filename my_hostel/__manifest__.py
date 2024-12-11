@@ -23,6 +23,5 @@
 	],
     'assets': {
         #'web.assets_backend': ['web/static/src/xml/**/*',],
-    },
-    #'demo': ['demo.xml'],
+    }
 }
