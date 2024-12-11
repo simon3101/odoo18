@@ -96,7 +96,7 @@ class HostelRoom(models.Model):
     # cap 5.3
     def log_all_room_members(self):
         # Este es un conjunto de registros vacío del modelo hostel.room.member
-        hostel_room_obj = self.env['hostel.room.members']
+        hostel_room_obj = self.env['hostel.room']
         all_members = hostel_room_obj.search([])
         print("TODOS LOS MIEMBROS:", all_members)
         return True
@@ -163,9 +163,11 @@ class HostelRoom(models.Model):
 
     def make_closed(self):
         self.change_state('closed')
+
     # cap 5.8
     def filter_members(self):
         all_rooms = self.search([])
+        # print("All rooms, es igual a: " ,all_rooms) =. lista completa de registros del modelo
         filtered_rooms = self.room_with_multiple_members(all_rooms)
         _logger.info('Filtered Rooms: %s', filtered_rooms)
         # print(filtered_rooms)
@@ -178,19 +180,25 @@ class HostelRoom(models.Model):
             return False
         return all_rooms.filtered(predicate)
 
-    # def all_rooms_with_category(self):
-    #     all_rooms = self.search([])
-    #     # este solo me retornara todos los
-    #     return print (all_rooms.filtered('category_id'))
+    def get_mapped_amenities(self):
+        all_rooms = self.search([])# esto traera una lista de registros
+        mapped_amenties = all_rooms.get_amenities_names(all_rooms)
+        _logger.info('Filtered Rooms: %s', mapped_amenties)
     
-    # def get_amenities_names(self):
-    #     return print(self.mapped('hostel_amenities_ids.name'))
-
     @api.model
     def get_amenities_names(self,all_rooms):
-        # print("ola mundo")
-        # print(type(rooms))
-        # print(type(self))
-        # print(self)
-        # print(self)
-        return all_rooms.mapped('name')
+        print("Modelo hostel.room",self) # => hostel.room()
+        print("id del room donde estoy llamando a la accion ",all_rooms) # => [5]
+        # print("Este es el room",room) # => error de argumentos pasados, por tanto room no puede ir
+        # print("Este es el mapped de amenities id usando el modelo instanciado pero si registros asociados: ",self.mapped('hostel_amenities_ids')) # => []
+        return all_rooms.mapped('hostel_amenities_ids.name')
+
+    def sorted_list(self):
+        all_rooms = self.search([])
+        sorted_recs = all_rooms.sort_records(all_rooms)
+        _logger.info('Filtered Rooms: %s', sorted_recs)
+    
+    @api.model
+    def sort_records(self,rooms):
+        # print(rooms.student_ids.gender)
+        return rooms.sorted('rent_amount')

@@ -15,8 +15,8 @@
                     <button name="find_room" string="Find room" type="object"/>
                     <button name="combining_records" string="Combining record" type="object"/>
                     <button name="filter_members" type="object" string="Filter members"/>
-                    <!-- <button name="all_rooms_with_category" type="object" string="Category_id filter"/> -->
-                    <button name="get_amenities_names" type="object" string="Amenities log"/>
+                    <button name="get_mapped_amenities" type="object" string="Amenities log"/>
+                    <button name="sorted_list" type="object" string="Sort records"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>

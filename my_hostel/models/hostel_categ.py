@@ -7,7 +7,6 @@ class HostelCategory(models.Model):
     _parent_store = True #
     _parent_name = "parent_id" # optional if field is 'parent_id'
     
-
     name = fields.Char(string="Category Name", required=True, help="Name of the category")
     description = fields.Text('Description')
     parent_id = fields.Many2one(
