@@ -5,14 +5,17 @@
         <field name="name"> hostel.room.form.view</field>
         <field name="model">hostel.room</field>
         <field name="arch" type='xml'>
-            <form string="Room">
+            <form>
                 <header>
-                    <!-- aca cuando se presioa el boton, estara llamando el metodo make_available  -->
                     <button name="make_available" string="Make available" type="object"/>
                     <button name="make_closed" string="Make Close" type="object"/>
                     <button name="log_all_room_members" string="Log Members" type="object"/>
                     <button name="update_room_no" string="Update room number" type="object"/>
                     <button name="find_room" string="Find room" type="object"/>
+                    <button name="combining_records" string="Combining record" type="object"/>
+                    <button name="filter_members" type="object" string="Filter members"/>
+                    <button name="get_mapped_amenities" type="object" string="Amenities log"/>
+                    <button name="sorted_list" type="object" string="Sort records"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -29,12 +32,12 @@
                         <field name="hostel_amenities_ids"/>
                         <field name="student_per_room"/>
                         <field name="admission_date"/>
-                        <field name="discharge_date"/>
+                        <!-- <field name="discharge_date"/> -->
                         <field name="availability"/>
                         <!-- podemos este campo de duration para que solo se visualice -->
                         <field name="duration" readonly="1"/>
                         <field name="authored_book_ids"/>
-                        <field name="category_id"/>d
+                        <!-- <field name="category_id"/>d -->
                     </group>  
                 </sheet>
             </form>

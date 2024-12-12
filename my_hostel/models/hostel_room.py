@@ -1,9 +1,13 @@
+import logging
+
 from odoo import fields, models, api
 from odoo.exceptions import ValidationError
 from datetime import timedelta
 # cap 5.2
 from odoo.exceptions import UserError
 from odoo.tools.translate import _
+
+_logger = logging.getLogger(__name__)
 
 class HostelRoom(models.Model):
 
@@ -74,19 +78,25 @@ class HostelRoom(models.Model):
             '|',  # Operador lógico OR
                 '&',  # Operador lógico AND
                     ('name', 'ilike', 'Room Name'),
-                    ('category_id.name', "ilike", 'Child'),
+                    ('category_id', "ilike", 'Child category 1'),
                 '&',
                     ('name', 'ilike', 'Second Room Name 2'),
-                    ('category_id.name', "ilike", 'Child'),
+                    ('category_id.name', "ilike", 'Child category 2'),
         ]
 
         rooms = self.search(domain)
         print("Habitaciones encontradas:", rooms)
         return rooms
+
+    def combining_records(self):
+        recordset_1 = self.search([("name","ilike",'Room Name')])
+        recordset_2 = self.search([("rent_amount",">=",100)])
+        result = recordset_1 + recordset_2
+        return print(result)
     # cap 5.3
     def log_all_room_members(self):
         # Este es un conjunto de registros vacío del modelo hostel.room.member
-        hostel_room_obj = self.env['hostel.room.members']
+        hostel_room_obj = self.env['hostel.room']
         all_members = hostel_room_obj.search([])
         print("TODOS LOS MIEMBROS:", all_members)
         return True
@@ -130,7 +140,7 @@ class HostelRoom(models.Model):
             ('available', 'closed'),
             ('closed', 'draft')
         ]
-        print(old_state,new_state)
+        # print(old_state,new_state)
         return (old_state, new_state) in allowed
 
     def change_state(self, new_state):
@@ -139,9 +149,9 @@ class HostelRoom(models.Model):
             print(room)
             # esto nos dice, aca estamos en el registro con id = 3
             if room.is_allowed_transition(room.state, new_state): # si la condicion existe entonces sigue
-                print(room.state) # draft
+                # print(room.state) # draft
                 room.state = new_state # este sera el nuevo estado por defecto
-                print(room.state) # available o clased (dependiendo de lo que elija el usuario)
+                # print(room.state) # available o clased (dependiendo de lo que elija el usuario)
             else:
                 # room.is_allowed_transition(room.state, new_state) si este es false arrojara este error
                 # Cap 5.2
@@ -154,3 +164,41 @@ class HostelRoom(models.Model):
     def make_closed(self):
         self.change_state('closed')
 
+    # cap 5.8
+    def filter_members(self):
+        all_rooms = self.search([])
+        # print("All rooms, es igual a: " ,all_rooms) =. lista completa de registros del modelo
+        filtered_rooms = self.room_with_multiple_members(all_rooms)
+        _logger.info('Filtered Rooms: %s', filtered_rooms)
+        # print(filtered_rooms)
+    
+    @api.model
+    def room_with_multiple_members(self, all_rooms):
+        def predicate(room):
+            if len(room.student_ids) > 1:
+                return True
+            return False
+        return all_rooms.filtered(predicate)
+
+    def get_mapped_amenities(self):
+        all_rooms = self.search([])# esto traera una lista de registros
+        mapped_amenties = all_rooms.get_amenities_names(all_rooms)
+        _logger.info('Filtered Rooms: %s', mapped_amenties)
+    
+    @api.model
+    def get_amenities_names(self,all_rooms):
+        print("Modelo hostel.room",self) # => hostel.room()
+        print("id del room donde estoy llamando a la accion ",all_rooms) # => [5]
+        # print("Este es el room",room) # => error de argumentos pasados, por tanto room no puede ir
+        # print("Este es el mapped de amenities id usando el modelo instanciado pero si registros asociados: ",self.mapped('hostel_amenities_ids')) # => []
+        return all_rooms.mapped('hostel_amenities_ids.name')
+
+    def sorted_list(self):
+        all_rooms = self.search([])
+        sorted_recs = all_rooms.sort_records(all_rooms)
+        _logger.info('Filtered Rooms: %s', sorted_recs)
+    
+    @api.model
+    def sort_records(self,rooms):
+        # print(rooms.student_ids.gender)
+        return rooms.sorted('rent_amount')
