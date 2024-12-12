@@ -140,7 +140,7 @@ class HostelRoom(models.Model):
             ('available', 'closed'),
             ('closed', 'draft')
         ]
-        print(old_state,new_state)
+        # print(old_state,new_state)
         return (old_state, new_state) in allowed
 
     def change_state(self, new_state):
@@ -149,9 +149,9 @@ class HostelRoom(models.Model):
             print(room)
             # esto nos dice, aca estamos en el registro con id = 3
             if room.is_allowed_transition(room.state, new_state): # si la condicion existe entonces sigue
-                print(room.state) # draft
+                # print(room.state) # draft
                 room.state = new_state # este sera el nuevo estado por defecto
-                print(room.state) # available o clased (dependiendo de lo que elija el usuario)
+                # print(room.state) # available o clased (dependiendo de lo que elija el usuario)
             else:
                 # room.is_allowed_transition(room.state, new_state) si este es false arrojara este error
                 # Cap 5.2

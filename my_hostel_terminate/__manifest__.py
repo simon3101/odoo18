@@ -6,11 +6,9 @@
     'website': "http://www.example.com",
     'category': 'Uncategorized',
     'version': '18.0.1.0',
-    'depends': ['base'],
+    'depends': ['base',"my_hostel"],
     'data': [
-        # "security/ir.model.acces.csv",
         "views/hostel_room_terminate.xml",
-        "views/menus.xml"
 	],
     'assets': {
         #'web.assets_backend': ['web/static/src/xml/**/*',],
