@@ -18,7 +18,7 @@ class HostelRoom(models.Model):
     #("name", "Codigo sql", "Mensaje que mostrara")
     _inherit = ['base.archive']
     
-
+    remarks = fields.Char('Remarks')
     #Aca la relacion es de, muchas habitaciones que tiene un hotel (many), hay solo un hotel, por lo tanto el campo es Many2one
     hostel_id = fields.Many2one(
         'hostel.hostel',#Nombre del modelo, en este caso del hostel hostel
@@ -202,3 +202,28 @@ class HostelRoom(models.Model):
     def sort_records(self,rooms):
         # print(rooms.student_ids.gender)
         return rooms.sorted('rent_amount')
+
+    @api.model
+    def create(self, values):
+        _logger.info('Filtered Rooms: %s', values)#1
+        _logger.info('Filtered Rooms: %s', self)#hostel.room()
+        _logger.info('Filtered Rooms: %s',self.env.user)#res.users(2,)
+        values = self.env
+        if not values.user.has_groups("base.group_user"):
+            values.get('remarks')
+            if values.get('remarks'):
+                raise UserError(
+                    'No tienes permiso para modificar "remarks".'
+                )
+        return super(HostelRoom, self).create(values)
+
+    def write(self, values):
+        _logger.info('Filtered Rooms: %s', values)
+        _logger.info('Filtered Rooms: %s', self)
+        values = self.env.user
+        if not values.has_groups('my_hostel.group_hostel_manager'):
+            if values.get('remarks'):
+                raise UserError(
+                    'No tienes permiso para modificar "remarks".'
+                )
+        return super(HostelRoom, self).write(values)

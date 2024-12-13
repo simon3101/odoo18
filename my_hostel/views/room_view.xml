@@ -16,6 +16,8 @@
                     <button name="filter_members" type="object" string="Filter members"/>
                     <button name="get_mapped_amenities" type="object" string="Amenities log"/>
                     <button name="sorted_list" type="object" string="Sort records"/>
+                    <button name="create" type="object" string="Create records"/>
+                    <button name="write" type="object" string="write records"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -24,6 +26,7 @@
                         <field name="active"/>
                         <!--  como vemos aca el active no esta en el modelo original pero si en el abstrac model que creamos -->
                         <field name="name"/>
+                        <field name="remarks"/>
                         <field name="roomNo"/>
                         <field name="floorNo"/>  
                         <field name="rent_amount"/>
