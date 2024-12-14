@@ -71,6 +71,8 @@ class HostelRoom(models.Model):
     )
 
     category_id = fields.Many2one('hostel.category')
+
+    previous_room_id = fields.Many2one('hostel.room', string='Previous Room')
     # cap 5.6
     def find_room(self):
         print(self.category_id.name)
@@ -205,25 +207,59 @@ class HostelRoom(models.Model):
 
     @api.model
     def create(self, values):
+        # Este metodo extendido solo funcionara para los admin, debido a que el grupo user no tiene permiso para crear
         _logger.info('Filtered Rooms: %s', values)#1
         _logger.info('Filtered Rooms: %s', self)#hostel.room()
         _logger.info('Filtered Rooms: %s',self.env.user)#res.users(2,)
-        values = self.env
-        if not values.user.has_groups("base.group_user"):
+        user = self.env.user
+        # Aca tambien podria funcionar un if (condicion) == False
+        if not user.has_groups("my_hostel.group_hostel_manager"):
             values.get('remarks')
             if values.get('remarks'):
                 raise UserError(
-                    'No tienes permiso para modificar "remarks".'
+                    'No tienes permiso para crear un registro con algun valor en "remarks".'
                 )
         return super(HostelRoom, self).create(values)
 
     def write(self, values):
-        _logger.info('Filtered Rooms: %s', values)
-        _logger.info('Filtered Rooms: %s', self)
-        values = self.env.user
-        if not values.has_groups('my_hostel.group_hostel_manager'):
+        _logger.info('Filtered Rooms - 1: %s', values) #valor de remarks
+        _logger.info('Filtered Rooms - 2: %s', self)# instancia del objecto con el id del registro en el que estamos, o recordset
+        user= self.env.user
+        _logger.info('Filtered Rooms - 3: %s', user.has_groups('my_hostel.group_hostel_manager')) #False
+        # Aca tambien podria funcionar un if (condicion) == False
+        if not user.has_groups('my_hostel.group_hostel_manager'):
             if values.get('remarks'):
                 raise UserError(
                     'No tienes permiso para modificar "remarks".'
                 )
         return super(HostelRoom, self).write(values)
+
+    # como este metodo ya no se usa en la 18, el return result no, arroja nada
+    # por tanto estamos es creando un metodo name_get, mas no estamos sobreescribiendolo, como nos aparece en el libro
+    
+    def name_get(self):
+        result = []
+        # print(self.name_get())
+        self.display_name
+        for room in self:
+            members = room.hostel_amenities_ids.mapped('name')
+            name = '%s (%s)' % (room.name, ', '.join(members))
+            result.append((room.id, name))
+            print(self.display_name)
+        _logger.info('Filtered Rooms: %s',result)#id y name y amenities
+        return result
+
+    @api.model
+    def _name_search(self, name='', args=None, operator='ilike', limit=100, name_get_uid=None):
+        # Creamos una copia de los argumentos para evitar modificar los originales
+        args = [] if args is None else args.copy()
+        if not (name == '' and operator == 'ilike'):
+            # el name search necesita una dominio para funcionar, por tanto le agregamos este
+            args += ['|', '|',
+                        ('name', operator, name),
+                        ('roomNo', operator, name),
+                        ('hostel_amenities_ids.name', operator, name)
+                    ]
+        
+        return super(HostelRoom, self)._name_search(
+            name=name, args=args, operator=operator, limit=limit, name_get_uid=name_get_uid)
