@@ -17,7 +17,8 @@ class HostelRoom(models.Model):
     _sql_constraints = [("room_no_unique", "unique(room_no)", "Room number must beunique!")]
     #("name", "Codigo sql", "Mensaje que mostrara")
     _inherit = ['base.archive']
-    
+    _rec_names_search = ["id","name","roomNo"]
+
     remarks = fields.Char('Remarks')
     #Aca la relacion es de, muchas habitaciones que tiene un hotel (many), hay solo un hotel, por lo tanto el campo es Many2one
     hostel_id = fields.Many2one(
@@ -73,6 +74,8 @@ class HostelRoom(models.Model):
     category_id = fields.Many2one('hostel.category')
 
     previous_room_id = fields.Many2one('hostel.room', string='Previous Room')
+    # cost_price = fields.Float('Costo de la habitación')
+
     # cap 5.6
     def find_room(self):
         print(self.category_id.name)
@@ -234,20 +237,12 @@ class HostelRoom(models.Model):
                 )
         return super(HostelRoom, self).write(values)
 
-    # como este metodo ya no se usa en la 18, el return result no, arroja nada
-    # por tanto estamos es creando un metodo name_get, mas no estamos sobreescribiendolo, como nos aparece en el libro
-    
-    def name_get(self):
-        result = []
-        # print(self.name_get())
-        self.display_name
+    def _compute_display_name(self):
         for room in self:
-            members = room.hostel_amenities_ids.mapped('name')
-            name = '%s (%s)' % (room.name, ', '.join(members))
-            result.append((room.id, name))
-            print(self.display_name)
-        _logger.info('Filtered Rooms: %s',result)#id y name y amenities
-        return result
+            amenities = room.hostel_amenities_ids.mapped('name')
+            name = '%s %s (%s)' % (room.id,room.name, ', '.join(amenities))  
+            room.display_name = f'{name}'
+        return
 
     @api.model
     def _name_search(self, name='', args=None, operator='ilike', limit=100, name_get_uid=None):
@@ -260,6 +255,23 @@ class HostelRoom(models.Model):
                         ('roomNo', operator, name),
                         ('hostel_amenities_ids.name', operator, name)
                     ]
-        
+        else:
+            raise UserError(
+                    'No se esta haciendo la busqueda como deberia".'
+                )
         return super(HostelRoom, self)._name_search(
             name=name, args=args, operator=operator, limit=limit, name_get_uid=name_get_uid)
+
+    @api.model
+    def get_average_cost(self,room):
+        # print(room)
+        grouped_result = self.env["hostel.room"].read_group(
+            [('rent_amount', "!=", False)],  # Dominio
+            ['category_id', 'rent_amount:avg'],  # Campos a acceder
+            ['category_id']  # Agrupar
+        )
+        _logger.info('Filtered Rooms - 1: %s', grouped_result)
+        # De prueba mostraremos los grupos encontrados
+        for g in grouped_result:
+            print(g)
+        return grouped_result
