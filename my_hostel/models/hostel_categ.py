@@ -16,7 +16,7 @@ class HostelCategory(models.Model):
         index=True,# esto es para ser indexado en la base de datos, por defecto no lo esta, si lo esta es mas rapido consultar
         help="Parent category in the hierarchy"
     )
-    parent_path = fields.Char(index=True, unaccent=False)
+    parent_path = fields.Char(index=True)
 
     child_ids = fields.One2many(
         comodel_name="hostel.category",

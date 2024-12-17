@@ -5,12 +5,13 @@
     'author': "SoftHard",
     'website': "http://www.example.com",
     'category': 'Uncategorized',
-    'version': '18.0.1.0',
+    'version': '18.0.1.2',
     'depends': ['base'],
     'data': [
         "security/hostel_security.xml",
         "security/ir.model.access.csv",
         "data/data.xml",
+        "data/category_data.xml",
         "views/res_partner.xml",
         "views/hostel_view.xml",  
         "views/student_view.xml",
@@ -23,5 +24,10 @@
 	],
     'assets': {
         #'web.assets_backend': ['web/static/src/xml/**/*',],
-    }
+    },
+    'demo': [
+        'data/demo.xml',
+    ],
+    'license': 'LGPL-3'
 }
+

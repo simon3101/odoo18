@@ -39,4 +39,4 @@ class HostelStudent(models.Model):
         related='room_id.hostel_id'
     )
 
-    partner_id = fields.Many2one('res.partner',string="Partner",ondelete='cascade')
+    partner_id = fields.Many2one('res.partner',string="Partner",ondelete='cascade', required=True )
