@@ -12,5 +12,6 @@
 	],
     'assets': {
         #'web.assets_backend': ['web/static/src/xml/**/*',],
-    }
+    },
+    'license': 'LGPL-3'
 }

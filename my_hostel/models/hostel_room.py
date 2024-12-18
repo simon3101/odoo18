@@ -17,8 +17,9 @@ class HostelRoom(models.Model):
     _sql_constraints = [("room_no_unique", "unique(room_no)", "Room number must beunique!")]
     #("name", "Codigo sql", "Mensaje que mostrara")
     _inherit = ['base.archive']
-    
+    # _rec_names_search = ["id","name","roomNo"]
 
+    remarks = fields.Char('Remarks')
     #Aca la relacion es de, muchas habitaciones que tiene un hotel (many), hay solo un hotel, por lo tanto el campo es Many2one
     hostel_id = fields.Many2one(
         'hostel.hostel',#Nombre del modelo, en este caso del hostel hostel
@@ -27,41 +28,39 @@ class HostelRoom(models.Model):
         )
 
     name = fields.Char("Room Name",required=True)
-    roomNo = fields.Integer("Room No",required=True)
-    floorNo = fields.Integer("Floor No",required=True)
-    #Esto nos dice, crea el campo, en el registro, con la relacion de muchos a uno
-    #el res.currency es un modelo de odoo, donde se encuentran las divisas almacenadas por odoo
-    currency_id = fields.Many2one('res.currency',string='Currency', required=True)
-    #Este sera un campo, donde tendra como valor la cantidad monetaria segun la denominacion
+    roomNo = fields.Integer("Room No")
+    floorNo = fields.Integer("Floor No")
+    
+    currency_id = fields.Many2one('res.currency',string='Currency')
+    
     rent_amount = fields.Monetary('Rent Amount', help="Enter a rent amount per month")
     student_ids = fields.One2many(
-                                "hostel.student",#Nombre del comodelo que se relacion
-                                "room_id", #variable del comodelo a la hacemos referencia
-                                string="Students", #texto del campo
-                                help="Enter students"# ayuda en el campo
+                                "hostel.student",
+                                "room_id", 
+                                string="Students", 
+                                help="Enter students"
                                 )
     hostel_amenities_ids = fields.Many2many(
-        "hostel.amenities",#comodelo relacionado, en este caso amenities
-        "hostel_room_amenities_rel", #nombre de la tabla relacionada, si no esta creada, se crea una
-        "room_id", #campo many2one del modelo student
-        "amenitiy_id", #campo many2one del modelo Amenity que se relaciona con el campo many2one del modelo Student #si no existe este nombre se crea por defecto,  #por lo general estos son parametros opcionales
+        "hostel.amenities",
+        "hostel_room_amenities_rel", 
+        "room_id", 
+        "amenitiy_id",
         string="Amenities", 
         domain="[('active', '=', True)]",
         help="Select hostel room amenities"
     )
     
-    #campo que tendra el numero de estudiantes que cabran por habitacion
-    student_per_room = fields.Integer("Students per Room", required=True, help="Room student assignment")
-    #este sera el campo calculado
+    student_per_room = fields.Integer("Students per Room", required=True, help="Room student assignment",default=0)
+
     availability = fields.Float(compute="_compute_check_availability",store=True, string="Avalaibility",help="Avalaibility hostal's room")
 
-    #sera un campo donde agreguemos una fecha de admision
+    
     admission_date = fields.Date("Admission Date", help="Admission Hostal's Date",default=fields.Datetime.today)
     discharge_date = fields.Date("Up date", help="Up student's Date")
     duration = fields.Integer("Duration", compute="_compute_check_duration", inverse="_inverse_duration",help="insert duration")
     
     authored_book_ids = fields.Many2many("res.partner")
-    # Cap 4
+
     state = fields.Selection([
         ('draft', 'No available'),
         ('available', 'Available'),
@@ -71,12 +70,14 @@ class HostelRoom(models.Model):
     )
 
     category_id = fields.Many2one('hostel.category')
-    # cap 5.6
+
+    previous_room_id = fields.Many2one('hostel.room', string='Previous Room')
+
     def find_room(self):
         print(self.category_id.name)
         domain = [
-            '|',  # Operador lógico OR
-                '&',  # Operador lógico AND
+            '|',  
+                '&',  
                     ('name', 'ilike', 'Room Name'),
                     ('category_id', "ilike", 'Child category 1'),
                 '&',
@@ -93,18 +94,16 @@ class HostelRoom(models.Model):
         recordset_2 = self.search([("rent_amount",">=",100)])
         result = recordset_1 + recordset_2
         return print(result)
-    # cap 5.3
+
     def log_all_room_members(self):
-        # Este es un conjunto de registros vacío del modelo hostel.room.member
+        
         hostel_room_obj = self.env['hostel.room']
         all_members = hostel_room_obj.search([])
         print("TODOS LOS MIEMBROS:", all_members)
         return True
 
-    # cap 5.5 
     def update_room_no(self):
-        self.ensure_one()  # Asegura que solo se esté trabajando con un registro.
-        self.roomNo = "002"
+        self.roomNo = self.id
     
     @api.depends("student_per_room", "student_ids")
     def _compute_check_availability(self):
@@ -118,7 +117,6 @@ class HostelRoom(models.Model):
         if self.rent_amount < 0:
             raise ValidationError(("the month rent amount can't be negative!"))
 
-#este decorador calculara la duracion del estudiante, en base a si fecha de admision y la fecha de salida
     @api.depends("admission_date", "discharge_date")
     def _compute_check_duration(self):
         """Método para calcular la duración"""
@@ -132,7 +130,6 @@ class HostelRoom(models.Model):
                 duration = (stu.discharge_date - stu.admission_date).days
                 if duration != stu.duration:
                     stu.discharge_date = (stu.admission_date + timedelta(days=stu.duration)).strftime('%Y-%m-%d')        
-    # Cap 5
     @api.model
     def is_allowed_transition(self, old_state, new_state):
         allowed = [
@@ -140,21 +137,17 @@ class HostelRoom(models.Model):
             ('available', 'closed'),
             ('closed', 'draft')
         ]
-        # print(old_state,new_state)
+        
         return (old_state, new_state) in allowed
 
     def change_state(self, new_state):
-        # con esta funcion pasamos de un estado a otro
+        
         for room in self:
             print(room)
-            # esto nos dice, aca estamos en el registro con id = 3
-            if room.is_allowed_transition(room.state, new_state): # si la condicion existe entonces sigue
-                # print(room.state) # draft
-                room.state = new_state # este sera el nuevo estado por defecto
-                # print(room.state) # available o clased (dependiendo de lo que elija el usuario)
+            
+            if room.is_allowed_transition(room.state, new_state): 
+                room.state = new_state
             else:
-                # room.is_allowed_transition(room.state, new_state) si este es false arrojara este error
-                # Cap 5.2
                 msg = _('Moving from %s to %s is not allowed') % (room.state, new_state)
                 raise UserError(msg)
 
@@ -164,13 +157,10 @@ class HostelRoom(models.Model):
     def make_closed(self):
         self.change_state('closed')
 
-    # cap 5.8
     def filter_members(self):
         all_rooms = self.search([])
-        # print("All rooms, es igual a: " ,all_rooms) =. lista completa de registros del modelo
         filtered_rooms = self.room_with_multiple_members(all_rooms)
         _logger.info('Filtered Rooms: %s', filtered_rooms)
-        # print(filtered_rooms)
     
     @api.model
     def room_with_multiple_members(self, all_rooms):
@@ -181,16 +171,14 @@ class HostelRoom(models.Model):
         return all_rooms.filtered(predicate)
 
     def get_mapped_amenities(self):
-        all_rooms = self.search([])# esto traera una lista de registros
+        all_rooms = self.search([])
         mapped_amenties = all_rooms.get_amenities_names(all_rooms)
         _logger.info('Filtered Rooms: %s', mapped_amenties)
     
     @api.model
     def get_amenities_names(self,all_rooms):
-        print("Modelo hostel.room",self) # => hostel.room()
-        print("id del room donde estoy llamando a la accion ",all_rooms) # => [5]
-        # print("Este es el room",room) # => error de argumentos pasados, por tanto room no puede ir
-        # print("Este es el mapped de amenities id usando el modelo instanciado pero si registros asociados: ",self.mapped('hostel_amenities_ids')) # => []
+        print("Modelo hostel.room",self) 
+        print("id del room donde estoy llamando a la accion ",all_rooms)
         return all_rooms.mapped('hostel_amenities_ids.name')
 
     def sorted_list(self):
@@ -200,5 +188,76 @@ class HostelRoom(models.Model):
     
     @api.model
     def sort_records(self,rooms):
-        # print(rooms.student_ids.gender)
         return rooms.sorted('rent_amount')
+
+    @api.model
+    def create(self, values):
+        _logger.info('Filtered Rooms: %s', values)#1
+        _logger.info('Filtered Rooms: %s', self)#hostel.room()
+        _logger.info('Filtered Rooms: %s',self.env.user)#res.users(2,)
+        user = self.env.user
+        if not user.has_groups("my_hostel.group_hostel_manager"):
+            values.get('remarks')
+            if values.get('remarks'):
+                raise UserError(
+                    'No tienes permiso para crear un registro con algun valor en "remarks".'
+                )
+        return super(HostelRoom, self).create(values)
+
+    def write(self, values):
+        _logger.info('Filtered Rooms - 1: %s', values)
+        _logger.info('Filtered Rooms - 2: %s', self)
+        user= self.env.user
+        _logger.info('Filtered Rooms - 3: %s', user.has_groups('my_hostel.group_hostel_manager'))
+        if not user.has_groups('my_hostel.group_hostel_manager'):
+            if values.get('remarks'):
+                raise UserError(
+                    'No tienes permiso para modificar "remarks".'
+                )
+        return super(HostelRoom, self).write(values)
+
+    def _compute_display_name(self):
+        for room in self:
+            amenities = room.hostel_amenities_ids.mapped('name')
+            name = '%s %s (%s)' % (room.id,room.name, ', '.join(amenities))  
+            room.display_name = f'{name}'
+        return
+
+    @api.model
+    def _name_search(self, name='', args=None, operator='ilike', limit=100, name_get_uid=None):
+        args = [] if args is None else args.copy()
+        if not (name == '' and operator == 'ilike'):
+            args += ['|', '|',
+                        ('name', operator, name),
+                        ('roomNo', operator, name),
+                        ('hostel_amenities_ids.name', operator, name)
+                    ]
+        else:
+            raise UserError(
+                    'No se esta haciendo la busqueda como deberia".'
+                )
+        return super(HostelRoom, self)._name_search(
+            name=name, args=args, operator=operator, limit=limit, name_get_uid=name_get_uid)
+    
+    @api.model
+    def _get_average_cost(self,room):
+
+        grouped_result = self.read_group(
+            [('rent_amount', "!=", False)],  
+            ['category_id', 'rent_amount:avg'],  
+            ['category_id']  
+        )
+        _logger.info('Filtered Rooms - 1: %s', grouped_result)
+        _logger.info('Filtered Rooms - 1: %s', room)
+        for g in grouped_result:
+            print(g)
+        return grouped_result
+
+    def get_average(self):
+        result = self._get_average_cost(self)
+    
+    @api.model
+    def _update_room_price(self):
+        all_rooms = self.search([])
+        for room in all_rooms:
+            room.rent_amount = room.rent_amount + 10

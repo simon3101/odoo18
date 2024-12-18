@@ -5,6 +5,35 @@
             <field name="name">Rating Value</field>
             <field name="digits">3</field>
         </record>
-    </data>
+        <record id="hostel_room_1" model="hostel.room">
+            <field name="name">Restaurant</field>
+        </record>
+        <record id="hostel_amenities" model="hostel.amenities">
+            <field name="name">Restaurant</field>
+        </record>
+        <record id="base.main_company" model="res.company">
+            <field name="name">Packt Publishing</field>
+        </record>
+    
+        <record id="res_partner_packt" model="res.partner">
+                <field name="name">Packt Publishing</field>
+                <field name="city">Birmingham</field>
+                <field name="country_id" ref="base.uk" />
+        </record>
 
+        <record id="room_category_to_remove" model="hostel.category"> <!--Eliminado-->
+            <field name="name">Single sharing</field>
+        </record>
+        <record id="room_category_not_remove" model="hostel.category">
+            <field name="name">Double Sharing 2</field>
+        </record>
+
+        <delete model="hostel.category" id="room_category_to_remove"/>
+        <!-- tambien se puede hacer por dominio de busqueda -->
+        <!-- <delete model="hostel.category" search="[('name', 'ilike', 'Double Sharing 2')]"/> -->
+
+        <!-- Funciones  -->
+        <function model="hostel.room" name="_update_room_price"/>
+        
+    </data>
 </odoo> 

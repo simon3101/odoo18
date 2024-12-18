@@ -1,0 +1,13 @@
+<odoo>
+        <record id="member_hda" model="res.partner">
+            <field name="name">Husen Daudi</field>
+        </record>
+        <record id="member_jvo" model="res.partner">
+            <field name="name">Jay Vora</field>
+        </record>
+        <record id="hostel_room_1" model="hostel.room">
+            <field name="name">Hostel Room 01</field>
+            <field name="roomNo">1</field>
+            <field name="authored_book_ids" eval="[(6, 0, [ref('member_hda'), ref('member_jvo')])]" />
+        </record>
+</odoo>

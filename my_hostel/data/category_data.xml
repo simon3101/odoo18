@@ -1,0 +1,5 @@
+<odoo noupdate="1">
+    <record id="room_category_all" model="hostel.category" forcecreate="false">
+        <field name="name">All rooms</field>
+    </record>
+</odoo>

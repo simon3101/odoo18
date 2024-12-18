@@ -16,6 +16,7 @@
                     <button name="filter_members" type="object" string="Filter members"/>
                     <button name="get_mapped_amenities" type="object" string="Amenities log"/>
                     <button name="sorted_list" type="object" string="Sort records"/>
+                    <button string='average cost per category' name="get_average" type="object" class="oe_highlight"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -24,6 +25,7 @@
                         <field name="active"/>
                         <!--  como vemos aca el active no esta en el modelo original pero si en el abstrac model que creamos -->
                         <field name="name"/>
+                        <field name="remarks"/>
                         <field name="roomNo"/>
                         <field name="floorNo"/>  
                         <field name="rent_amount"/>
@@ -36,8 +38,10 @@
                         <field name="availability"/>
                         <!-- podemos este campo de duration para que solo se visualice -->
                         <field name="duration" readonly="1"/>
+                        <field name="previous_room_id" />
                         <field name="authored_book_ids"/>
                         <!-- <field name="category_id"/>d -->
+                        <!-- <field name="cost_price"/> -->
                     </group>  
                 </sheet>
             </form>
@@ -57,6 +61,7 @@
                 <field name="currency_id"/>
                 <field name="student_ids"/>
                 <field name="hostel_amenities_ids"/>
+                <field name="authored_book_ids"/>
                 <field name="state" widget="statusbar"/>
             </list>
         </field>

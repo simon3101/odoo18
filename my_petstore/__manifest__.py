@@ -30,5 +30,6 @@ Encontraras la mascota que quieres
     'demo': [
         'demo/demo.xml',
     ],
+    'license': 'LGPL-3'
 }
 
