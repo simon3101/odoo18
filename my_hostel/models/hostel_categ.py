@@ -14,9 +14,9 @@ class HostelCategory(models.Model):
         string="Parent Category",
         ondelete="restrict",# Si se intenta borrar la referencia dara un error si hay una creada
         index=True,# esto es para ser indexado en la base de datos, por defecto no lo esta, si lo esta es mas rapido consultar
-        help="Parent category in the hierarchy"
+        help="Parent category in the hierarchy",
     )
-    parent_path = fields.Char(index=True)
+    parent_path = fields.Char(index=True,readonly=True)
 
     child_ids = fields.One2many(
         comodel_name="hostel.category",
@@ -24,7 +24,7 @@ class HostelCategory(models.Model):
         string="Child Categories",
         help="Subcategories of this category"
     )
-    
+    create_category_id = fields.Many2one('hostel.category')
     # Método para generar categorías ficticias
     def create_categories(self):
         # Diccionario con los valores de la primera subcategoría
@@ -53,3 +53,6 @@ class HostelCategory(models.Model):
     def _check_hierarchy(self):
         if not self._check_recursion():
             raise models.ValidationError('Error! You cannot create recursive categories.')
+
+    def log_parent(self):
+        return print(self.parent_path)

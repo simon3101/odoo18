@@ -24,6 +24,7 @@
                         type="object"
                         string="Generate Dummy Categories"
                         class="btn-primary"/>
+                <button string="log of parent_path" name="log_parent" type="object" class="oe_highlight"/>
             </header>
                 <sheet>
                     <group>

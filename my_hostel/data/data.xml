@@ -23,7 +23,7 @@
 
         <record id="room_category_to_remove" model="hostel.category"> <!--Eliminado-->
             <field name="name">Single sharing</field>
-        </record>
+        </record>   
         <record id="room_category_not_remove" model="hostel.category">
             <field name="name">Double Sharing 2</field>
         </record>

@@ -2,7 +2,7 @@ import logging
 
 from odoo import fields, models, api
 from odoo.exceptions import ValidationError
-from datetime import timedelta
+
 # cap 5.2
 from odoo.exceptions import UserError
 from odoo.tools.translate import _
@@ -24,7 +24,7 @@ class HostelRoom(models.Model):
     hostel_id = fields.Many2one(
         'hostel.hostel',#Nombre del modelo, en este caso del hostel hostel
         string='Hostel',#Nombre en la vista del modelo
-        help='Name of the hostell'
+        help='Name of my the hostel '
         )
 
     name = fields.Char("Room Name",required=True)
@@ -54,18 +54,13 @@ class HostelRoom(models.Model):
 
     availability = fields.Float(compute="_compute_check_availability",store=True, string="Avalaibility",help="Avalaibility hostal's room")
 
-    
-    admission_date = fields.Date("Admission Date", help="Admission Hostal's Date",default=fields.Datetime.today)
-    discharge_date = fields.Date("Up date", help="Up student's Date")
-    duration = fields.Integer("Duration", compute="_compute_check_duration", inverse="_inverse_duration",help="insert duration")
-    
     authored_book_ids = fields.Many2many("res.partner")
 
     state = fields.Selection([
         ('draft', 'No available'),
         ('available', 'Available'),
         ('closed', 'Closed')],
-        string='State', 
+        string='State',
         default='draft'
     )
 
@@ -117,21 +112,10 @@ class HostelRoom(models.Model):
         if self.rent_amount < 0:
             raise ValidationError(("the month rent amount can't be negative!"))
 
-    @api.depends("admission_date", "discharge_date")
-    def _compute_check_duration(self):
-        """Método para calcular la duración"""
-        for rec in self:
-            if rec.discharge_date and rec.admission_date:
-                rec.duration = (rec.discharge_date - rec.admission_date).days
-
-    def _inverse_duration(self):
-        for stu in self:
-            if stu.discharge_date and stu.admission_date:
-                duration = (stu.discharge_date - stu.admission_date).days
-                if duration != stu.duration:
-                    stu.discharge_date = (stu.admission_date + timedelta(days=stu.duration)).strftime('%Y-%m-%d')        
+            
     @api.model
     def is_allowed_transition(self, old_state, new_state):
+        # nos ayudara a verificar si el estado existe
         allowed = [
             ('draft', 'available'),
             ('available', 'closed'),
@@ -141,20 +125,23 @@ class HostelRoom(models.Model):
         return (old_state, new_state) in allowed
 
     def change_state(self, new_state):
-        
+        # nos ayudara a cambiar el estado al que el usuario quiera
         for room in self:
             print(room)
             
             if room.is_allowed_transition(room.state, new_state): 
                 room.state = new_state
             else:
+                _logger.exception("No tienes permiso para crear un registro con algun valor en remarks")
                 msg = _('Moving from %s to %s is not allowed') % (room.state, new_state)
                 raise UserError(msg)
 
     def make_available(self):
+        # nos ayudara para que cuando se presione el boton cambie de estado a available
         self.change_state('available')
 
     def make_closed(self):
+        # nos ayudara para que cuando se presione el boton cambie el estado a closed
         self.change_state('closed')
 
     def filter_members(self):
@@ -173,7 +160,10 @@ class HostelRoom(models.Model):
     def get_mapped_amenities(self):
         all_rooms = self.search([])
         mapped_amenties = all_rooms.get_amenities_names(all_rooms)
-        _logger.info('Filtered Rooms: %s', mapped_amenties)
+        _logger.info('Filtered Rooms : %s', mapped_amenties)
+        _logger.warning('Filtered Rooms: %s',mapped_amenties)
+        _logger.error('Filtered Rooms: %s',mapped_amenties)
+        _logger.critical('Filtered Rooms: %s',mapped_amenties)
     
     @api.model
     def get_amenities_names(self,all_rooms):
@@ -261,3 +251,23 @@ class HostelRoom(models.Model):
         all_rooms = self.search([])
         for room in all_rooms:
             room.rent_amount = room.rent_amount + 10
+
+    # Cap 8.2
+    def action_remove_room_members(self):
+        for student in self.student_ids:
+            # is_hostel_room = true es el contexto que tendran los registros del hostel_student para poder llamar al metodo action_remove_room
+            student.with_context(is_hostel_room=True).action_remove_room()
+
+    # Cap 8.3
+    def action_category_with_amount(self):
+        self.env.cr.execute(""" 
+            SELECT
+                name,
+                rent_amount
+            FROM
+                hostel_room
+            WHERE
+                hostel_room.name = %(room_name)s
+        """, {'room_name': self.name})
+        result = self.env.cr.fetchall()
+        _logger.warning("Hostel Room With Amount: %s", result)
