@@ -58,6 +58,8 @@ class Hostel(models.Model):
 	selection='_referencable_models',
 	string='Reference document'
 	)
+	
+
 	# category_id = fields.Many2one('hostel.category')
 	@api.depends('hostel_code')
 	def _compute_display_name(self):

@@ -17,6 +17,12 @@
                     <button name="get_mapped_amenities" type="object" string="Amenities log"/>
                     <button name="sorted_list" type="object" string="Sort records"/>
                     <button string='average cost per category' name="get_average" type="object" class="oe_highlight"/>
+                    <button string="Boton decorativo" name="get_average" type="object" class="oe_highlight"/>
+                    <!-- Cap 8.2 -->
+                    <button name="action_remove_room_members"  string="Remove Room Members"  type="object" /> 
+                    <!-- Cap 8.3 -->
+                    <button name="action_category_with_amount" string="Log Category With Amount" type="object"/>
+
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -33,11 +39,11 @@
                         <field name="student_ids"/>
                         <field name="hostel_amenities_ids"/>
                         <field name="student_per_room"/>
-                        <field name="admission_date"/>
+                        <!-- <field name="admission_date"/> -->
                         <!-- <field name="discharge_date"/> -->
                         <field name="availability"/>
                         <!-- podemos este campo de duration para que solo se visualice -->
-                        <field name="duration" readonly="1"/>
+                        <!-- <field name="duration" readonly="1"/> -->
                         <field name="previous_room_id" />
                         <field name="authored_book_ids"/>
                         <!-- <field name="category_id"/>d -->

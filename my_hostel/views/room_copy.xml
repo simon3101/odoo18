@@ -16,11 +16,11 @@
                         <field name="student_ids"/>
                         <field name="hostel_amenities_ids"/>
                         <field name="student_per_room"/>
-                        <field name="admission_date"/>
-                        <field name="discharge_date"/>
+                        <!-- <field name="admission_date"/>
+                        <field name="discharge_date"/> -->
                         <field name="availability"/>
                         <!-- podemos este campo de duration para que solo se visualice -->
-                        <field name="duration" readonly="1"/>
+                        <!-- <field name="duration" readonly="1"/> -->
                         <field name="authored_book_ids"/>
                     </group>  
                 </sheet>
