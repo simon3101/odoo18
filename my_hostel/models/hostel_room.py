@@ -271,3 +271,5 @@ class HostelRoom(models.Model):
         """, {'room_name': self.name})
         result = self.env.cr.fetchall()
         _logger.warning("Hostel Room With Amount: %s", result)
+
+    

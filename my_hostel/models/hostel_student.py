@@ -2,6 +2,8 @@ from odoo import models, fields, api
 from datetime import timedelta
 from odoo.exceptions import UserError
 from odoo.tools.translate import _
+# cap 8.6
+from odoo.tests.common import Form
 
 
 class HostelStudent(models.Model):
@@ -60,7 +62,7 @@ class HostelStudent(models.Model):
     admission_date = fields.Date("Admission Date", help="Admission Hostal's Date",default=fields.Datetime.today)
     discharge_date = fields.Date("Up date", help="Up student's Date")
     duration = fields.Integer("Duration", compute="_compute_check_duration", inverse="_inverse_duration",help="insert duration")
-    
+    duration_month = fields.Integer("Duration in month",inverse="_inverse_duration",help="insert duration")
 
     @api.depends("admission_date", "discharge_date")
     def _compute_check_duration(self):
@@ -116,7 +118,7 @@ class HostelStudent(models.Model):
 
     def make_cancel(self):
         self.change_state('cancel')
-    
+    # 8.1    # 
     def action_assign_room(self):
         self.ensure_one()  
         if self.status != "paid":  
@@ -132,7 +134,27 @@ class HostelStudent(models.Model):
         })  
         if room_rec:
             self.room_id = room_rec.id
-
+    # cap 8.2
     def action_remove_room(self):  
         if self.env.context.get("is_hostel_room"):  
             self.room_id = False  
+    # cap 8.5
+    @api.onchange('admission_date', 'discharge_date')
+    def onchange_duration(self):
+        # Aca recalculamos la duration pero en meses
+        if self.discharge_date and self.admission_date:
+            print(self.discharge_date.year)
+            print(self.admission_date.month)
+            print(self.discharge_date.year - self.admission_date.year)
+            print(self.discharge_date.month - self.admission_date.month)
+            print(self)
+            self.duration_month = (self.discharge_date.year - self.admission_date.year) * 12 + \
+                            (self.discharge_date.month - self.admission_date.month)
+
+    def return_room(self):
+        self.ensure_one()
+        wizard = self.env['assign.room.student.wizard']
+        with Form(wizard) as return_form:
+            return_form.room_id = self.env.ref('my_hostel.hostel_room_1')
+            record = return_form.save()
+            record.with_context(active_id=self.id).add_room_in_student()

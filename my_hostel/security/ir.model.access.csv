@@ -13,3 +13,4 @@ access_student_manager_id,access.student.manager,my_hostel.model_hostel_student,
 access_student_user_id,access.student.user,my_hostel.model_hostel_student,my_hostel.group_hostel_user,1,0,0,0
 access_room_member_manager_id,access.room_member.manager,my_hostel.model_hostel_room_members,my_hostel.group_hostel_manager,1,1,1,1
 access_room_member_user_id,access.room_member.user,my_hostel.model_hostel_room_members,my_hostel.group_hostel_user,1,0,0,0
+access_assign_room_student_wizard_manager,access.assign.room.student.wizard.manager,my_hostel.model_assign_room_student_wizard,my_hostel.group_hostel_manager,1,1,1,1
