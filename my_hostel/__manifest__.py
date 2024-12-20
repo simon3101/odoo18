@@ -20,7 +20,8 @@
         "views/categoy_view.xml",
         "views/room_view.xml",
         "views/actions.xml",
-        "views/menus.xml"
+        "views/menus.xml",
+        "wizards/assign_room_student_wizard_view.xml"
 	],
     'assets': {
         #'web.assets_backend': ['web/static/src/xml/**/*',],
