@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="hostel_room_avalability_pivot_view" model="ir.ui.view">
+        <field name="name">hostel.room.avalability.pivot</field>
+        <field name="model">hostel.room.avalability</field>
+        <field name="arch" type="xml">
+            <pivot sample="1"> 
+                <field name="room_id" type="row"/>
+                <field name="student_per_room" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+</odoo>

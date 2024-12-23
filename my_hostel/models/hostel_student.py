@@ -4,7 +4,9 @@ from odoo.exceptions import UserError
 from odoo.tools.translate import _
 # cap 8.6
 from odoo.tests.common import Form
+import logging
 
+_logger = logging.getLogger(__name__)
 
 class HostelStudent(models.Model):
     _name = "hostel.student"    
@@ -62,7 +64,7 @@ class HostelStudent(models.Model):
     admission_date = fields.Date("Admission Date", help="Admission Hostal's Date",default=fields.Datetime.today)
     discharge_date = fields.Date("Up date", help="Up student's Date")
     duration = fields.Integer("Duration", compute="_compute_check_duration", inverse="_inverse_duration",help="insert duration")
-    duration_month = fields.Integer("Duration in month",inverse="_inverse_duration",help="insert duration")
+    duration_month = fields.Integer("Duration in month",compute="onchange_duration",inverse="_inverse_duration",help="insert duration")
 
     @api.depends("admission_date", "discharge_date")
     def _compute_check_duration(self):
@@ -139,22 +141,35 @@ class HostelStudent(models.Model):
         if self.env.context.get("is_hostel_room"):  
             self.room_id = False  
     # cap 8.5
-    @api.onchange('admission_date', 'discharge_date')
+    @api.depends('admission_date', 'discharge_date')
     def onchange_duration(self):
         # Aca recalculamos la duration pero en meses
-        if self.discharge_date and self.admission_date:
-            print(self.discharge_date.year)
-            print(self.admission_date.month)
-            print(self.discharge_date.year - self.admission_date.year)
-            print(self.discharge_date.month - self.admission_date.month)
-            print(self)
-            self.duration_month = (self.discharge_date.year - self.admission_date.year) * 12 + \
-                            (self.discharge_date.month - self.admission_date.month)
-
+        for rec in self:
+            if rec.discharge_date and rec.admission_date:
+                print(rec.discharge_date.year)
+                print(rec.admission_date.month)
+                print(rec.discharge_date.year - rec.admission_date.year)
+                print(rec.discharge_date.month - rec.admission_date.month)
+                print(rec)
+                rec.duration_month = (rec.discharge_date.year - rec.admission_date.year) * 12 + \
+                                (rec.discharge_date.month - rec.admission_date.month)
+    # cap 8.6
     def return_room(self):
         self.ensure_one()
         wizard = self.env['assign.room.student.wizard']
+        _logger.info('Info about wizard: %s',wizard)
         with Form(wizard) as return_form:
             return_form.room_id = self.env.ref('my_hostel.hostel_room_1')
+            _logger.info('Info about return_room: %s',return_form)
             record = return_form.save()
             record.with_context(active_id=self.id).add_room_in_student()
+            _logger.info('Record: %s',record.search([]))
+    # cap 8.4
+    def add_room_in_student_wizard(self):
+        self.ensure_one()
+        return {
+            'name': 'Assign Room',
+            'type': 'ir.actions.act_window',
+            'res_model': 'assign.room.student.wizard',
+            'target':'new',
+        }
