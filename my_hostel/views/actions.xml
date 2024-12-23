@@ -47,5 +47,14 @@
         <field name="res_model">hostel.room.copy</field>
         <field name="view_mode">form</field>
     </record>
+
+    <record id="action_hostel_seven" model="ir.actions.act_window">
+        <field name="name">Hostel Availability</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hostel.room.avalability</field>
+        <field name="view_mode">pivot</field>
+    </record>
+
+    pivo
     
 </odoo>

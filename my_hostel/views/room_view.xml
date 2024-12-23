@@ -68,7 +68,7 @@
                 <field name="student_ids"/>
                 <field name="hostel_amenities_ids"/>
                 <field name="authored_book_ids"/>
-                <field name="state" widget="statusbar"/>
+                <field name="state"/>
             </list>
         </field>
     </record>

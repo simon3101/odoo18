@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
     <!-- Cap 8.4 -->
-    <record model="ir.actions.act_window" id="action_assign_room_student_wizard">
+    <!-- <record model="ir.actions.act_window" id="action_assign_room_student_wizard">
         <field name="name">Assign Room</field>
         <field name="res_model">assign.room.student.wizard</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
-    </record> 
+    </record>  -->
 
     <record id='assign_room_student_wizard_form' model='ir.ui.view'>
         <field name='name'>assign.room.student.wizard.form.view</field>
@@ -26,7 +26,7 @@
             </field>
     </record>
 
-    <menuitem id="assign_room_student_wizard" parent="my_hostel.hostel_main_menu" name="Assign room student " action="my_hostel.action_assign_room_student_wizard"/>
+    <!-- <menuitem id="assign_room_student_wizard" parent="my_hostel.hostel_main_menu" name="Assign room student " action="my_hostel.action_assign_room_student_wizard"/> -->
 
 
 </odoo>
