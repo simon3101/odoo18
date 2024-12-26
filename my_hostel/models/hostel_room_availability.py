@@ -1,8 +1,7 @@
-from odoo import api, fields, models
+from odoo import fields, models
 from odoo import tools
-class HostelRoomAvalability(models.AbstractModel):
-
-    _name = 'hostel.room.avalability'
+class HostelRoomAvalability(models.Model):
+    _name = 'hostel.room.availability'
     _description = 'Avalabity of the rooms'
     _auto = False
 
