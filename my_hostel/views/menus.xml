@@ -9,5 +9,5 @@
     <menuitem id="hostel_copy" name="Hostel copy" action="action_hostel_six" parent="hostel_main_menu" />
     <menuitem id="hostel_room_availability" name="Hostel Availability" action="action_hostel_seven" parent="hostel_main_menu" />
     <!-- Este menu no es necesario -->
-    <!-- <menuitem name="Settings" id="hostel_setting_menu" parent="hostel_main_menu" action="hostel_config_settings_action" sequence="50"/> -->
+    <menuitem name="Settings" id="hostel_setting_menu" parent="hostel_main_menu" action="hostel_config_settings_action" sequence="50"/>
 </odoo>

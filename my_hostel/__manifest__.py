@@ -31,6 +31,9 @@
     'demo': [
         'data/demo.xml',
     ],
+    'pre_init_hook': 'pre_init_hook_hostel',
+    'post_init_hook': 'add_room_hook',
+    'uninstall_hook': 'uninstall_hook_user',
     'license': 'LGPL-3'
 }
 
