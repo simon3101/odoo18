@@ -68,6 +68,8 @@ class HostelRoom(models.Model):
 
     previous_room_id = fields.Many2one('hostel.room', string='Previous Room')
 
+
+
     def find_room(self):
         print(self.category_id.name)
         domain = [
