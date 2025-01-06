@@ -19,6 +19,7 @@ class HostelRoom(models.Model):
     _inherit = ['base.archive']
     # _rec_names_search = ["id","name","roomNo"]
 
+    user_id = fields.Many2one('res.users', string='User')
     remarks = fields.Char('Remarks')
     #Aca la relacion es de, muchas habitaciones que tiene un hotel (many), hay solo un hotel, por lo tanto el campo es Many2one
     hostel_id = fields.Many2one(

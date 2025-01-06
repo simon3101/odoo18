@@ -19,9 +19,8 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hostel.room</field>
         <field name="view_mode">list,form</field>
-        <!-- para este caso siempre que se acceda a la vista form, asignara por defecto 1 -->
         <field name="context">{'lang': 'es_ES', 'default_lang': 'es_ES', 'active_test': False,'default_student_per_room': '1'}</field>
-        <field name="domain">[('state', '=', 'draft')]</field>
+        <field name="domain">['|', ('user_id', '=', uid), ('currency_id', '=', False), ('remarks', '=', False)]</field>
     </record>
 
     <record id="action_hostel_room_list" model="ir.actions.act_window.view">

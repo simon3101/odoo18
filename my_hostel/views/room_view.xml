@@ -77,16 +77,16 @@
         <field name="name">hostel.room.list.view</field>
         <field name="model">hostel.room</field>
         <field name="arch" type="xml">
-            <list>
-                <field name="name"/>    
-                <field name="hostel_id"/>
-                <field name="roomNo"/>
+            <list editable='bottom'>
+                <field name="name" />    
+                <field name="hostel_id" optional="show"/>
+                <field name="roomNo" />
                 <field name="floorNo"/>
                 <field name="rent_amount"/>
                 <field name="currency_id"/>
                 <field name="student_ids"/>
                 <field name="hostel_amenities_ids"/>
-                <field name="authored_book_ids"/>
+                <field name="authored_book_ids" optional="hide"/>
                 <field name="state"/>
             </list>
         </field>
