@@ -25,6 +25,9 @@
                         string="Generate Dummy Categories"
                         class="btn-primary"/>
                 <button string="log of parent_path" name="log_parent" type="object" class="oe_highlight"/>
+                <button name="make_available" string="Make available" type="object"/>
+                <button name="make_closed" string="Close" type="object"/>
+                <field name="state" widget="statusbar"/>
             </header>
                 <sheet>
                     <group>
@@ -34,9 +37,47 @@
                         <field name="parent_path"/>
                         <field name="child_ids"/>
                     </group>
+                    
                 </sheet>
             </form>
         </field>
     </record>
-    
+    <record id="hostel_room_category_view_kanban" model="ir.ui.view">
+        <field name="name">Hostel Room Categories kanban</field>
+        <field name="model">hostel.category</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile" sample="1">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="parent_id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="row mb4">
+                                <div class="col-6 o_kanban_record_headings">
+                                    <strong>
+                                        <span>
+                                            <field name="name"/>
+                                        </span>
+                                    </strong>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <strong>
+                                        <i role="img" title="description"/>
+                                        <t t-esc="record.description.value"/>
+                                    </strong>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <span><field name="parent_id"/></span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
 </odoo>

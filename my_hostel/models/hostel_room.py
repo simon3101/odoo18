@@ -229,8 +229,7 @@ class HostelRoom(models.Model):
             raise UserError(
                     'No se esta haciendo la busqueda como deberia".'
                 )
-        return super(HostelRoom, self)._name_search(
-            name=name, args=args, operator=operator, limit=limit, name_get_uid=name_get_uid)
+        return super(HostelRoom, self)._name_search(name=name, args=args, operator=operator, limit=limit, name_get_uid=name_get_uid)
     
     @api.model
     def _get_average_cost(self,room):

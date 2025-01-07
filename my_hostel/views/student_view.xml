@@ -4,7 +4,7 @@
         <field name="name">hostel.student.list.view</field>
         <field name="model">hostel.student</field>
         <field name="arch" type="xml">
-            <list>
+            <list editable='bottom'>
                 <field name="name"/>
                 <field name="gender"/>
                 <field name="active"/>

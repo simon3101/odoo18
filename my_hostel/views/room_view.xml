@@ -24,9 +24,7 @@
                     <button name="action_category_with_amount" string="Log Category With Amount" type="object"/>
 
                     <button class="oe_link" type="action" name="%(my_hostel.action_hostel_five)d" string="Abrir Categoría de Habitación de Hotel" />
-
-
-
+                    
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -77,7 +75,7 @@
         <field name="name">hostel.room.list.view</field>
         <field name="model">hostel.room</field>
         <field name="arch" type="xml">
-            <list editable='bottom'>
+            <list >
                 <field name="name" />    
                 <field name="hostel_id" optional="show"/>
                 <field name="roomNo" />
@@ -91,4 +89,60 @@
             </list>
         </field>
     </record>
+    <record id="hostel_room_view_search" model="ir.ui.view">
+        <field name="model">hostel.room</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="roomNo"/>
+                <field name="state"/>
+                <searchpanel>
+                    <field name="state" expand="1" select="multi" 
+                            icon="fa-check-square-o" enable_counters="1" />
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+    <!-- Vistas heredadas a parnert -->
+    <!-- Vista heredada al form -->
+    <record id="hostel_room_view_form_inherit" model="ir.ui.view">
+        <field name="name">Hostel Room Form Inherit</field>
+        <field name="model">hostel.room</field>
+        <field name="inherit_id" ref="my_hostel.view_hostel_room_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//form[1]" position="inside">
+                <field name="roomNo"/>
+            </xpath>
+            <xpath expr="//group[1]" position="after">
+                <group>
+                    <field name="remarks"/>
+                    <field name="availability"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <!-- Vista heredada al la busqueda predeterminada -->
+    <record id="hostel_room_view_search_inherit" model="ir.ui.view">
+        <field name="name">Hostel Room Search inherit</field>
+        <field name="model">hostel.room</field>
+        <field name="inherit_id" ref="my_hostel.hostel_room_view_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//search[1]" position="inside">
+            <field name="availability"></field>
+            </xpath>
+        </field>
+    </record>
+    <!-- Vista heredada a la vista -->
+    <record id="hostel_room_view_tree_inherit" model="ir.ui.view">
+        <field name="name">Hostel Room List Inherit</field>
+        <field name="model">hostel.room</field>
+        <field name="inherit_id" ref="my_hostel.view_hostel_room_list_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+            <field name="roomNo"/>
+            </xpath>
+        </field>
+    </record>
+
+
 </odoo>
