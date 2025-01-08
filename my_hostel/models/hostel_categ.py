@@ -39,6 +39,11 @@ class HostelCategory(models.Model):
         string='State',
         default='draft'
     )
+
+    date_assign = fields.Date(string='Assignment Date')
+    date_end = fields.Datetime(string='End Date')
+
+
     @api.model
     def is_allowed_transition(self, old_state, new_state):
         # nos ayudara a verificar si el estado existe

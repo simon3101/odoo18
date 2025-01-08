@@ -6,7 +6,7 @@
     'website': "http://www.example.com",
     'category': 'Uncategorized',
     'version': '18.0.1.2',
-    'depends': ['base'],
+    'depends': ['base','web_cohort','web_gantt','mail','web_map'],
     'data': [
         "security/hostel_security.xml",
         "security/ir.model.access.csv",

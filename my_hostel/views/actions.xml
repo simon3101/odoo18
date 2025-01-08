@@ -55,8 +55,9 @@
         <field name="name">Hostel Category</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hostel.category</field>
-        <field name="view_mode">kanban,list,form</field>
+        <field name="view_mode">list,form,calendar,kanban,graph,cohort,gantt,activity,map</field>
     </record>
+
     <record id="action_hostel_six" model="ir.actions.act_window">
         <field name="name">Hostel Category</field>
         <field name="type">ir.actions.act_window</field>
