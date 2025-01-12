@@ -4,7 +4,7 @@
     'description': "Efficiently manage the entire residential facility in the school.",
     'author': "SoftHard",
     'website': "http://www.example.com",
-    'category': 'Uncategorized',
+    'category': 'hostel',
     'version': '18.0.1.2',
     'depends': ['base','web_cohort','web_gantt','mail','web_map'],
     'data': [
