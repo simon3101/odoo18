@@ -59,6 +59,19 @@ class Hostel(models.Model):
 	is_public = fields.Boolean(string="Public",groups="my_hostel.group_hostel_manager")
 
 	notes = fields.Text(string="Some Text",groups="my_hostel.group_hostel_manager")
+	
+	date_start = fields.Date(string='Init date', groups='my_hostel.group_start_date',)
+	
+	details_added = fields.Text( string="Details", groups='my_hostel.group_hostel_manager')
+
+	def add_details(self):
+		self.ensure_one()
+		message = "Details are (added by: %s)" % self.env.user.name
+		self.sudo().write({
+			'details_added': message
+		})
+
+
 	# category_id = fields.Many2one('hostel.category')
 	@api.depends('hostel_code')
 	def _compute_display_name(self):

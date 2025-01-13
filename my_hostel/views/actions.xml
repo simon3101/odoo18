@@ -23,9 +23,9 @@
         <field name="domain">['|', ('remarks', '=', True), ('remarks', '=', False)]</field>
     </record>
 
-    <record id="action_hostel_room_list" model="ir.actions.act_window.view">
+    <!-- <record id="action_hostel_room_list" model="ir.actions.act_window.view">
         <field name="act_window_id" ref="action_hostel_two" />
-        <field name="view_id" ref="view_hostel_room_list_view" />
+        <field name="view_id" ref="my_hostel.view_hostel_room_list_view" />
         <field name="view_mode">list</field>
         <field name="sequence" eval="1"/>
     </record>
@@ -35,7 +35,7 @@
         <field name="view_id" ref="view_hostel_room_form_view" />
         <field name="view_mode">form</field>
         <field name="sequence" eval="2"/>
-    </record>
+    </record> -->
 
     <record id="action_hostel_three" model="ir.actions.act_window">
         <field name="name">Hostel Student</field>

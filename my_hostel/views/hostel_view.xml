@@ -10,6 +10,9 @@
         <field name="arch" type="xml">
         
             <form string="Hostel">
+                <header>
+                    <button string="Add details" name="add_details" type="object" groups="my_hostel.group_hostel_manager"/>
+                </header>
                 <sheet>
                     <div class="oe_title">
                         <h3>
@@ -61,6 +64,7 @@
                         <!-- <field name="other"/> -->
                         <field name="is_public"/>
                         <field name="notes"/> 
+                        <field name="details_added"/>
                     </group>
                 </sheet>
             </form>

@@ -51,7 +51,7 @@ class HostelRoom(models.Model):
         help="Select hostel room amenities"
     )
     
-    student_per_room = fields.Integer("Students per Room", required=True, help="Room student assignment",default=0)
+    student_per_room = fields.Integer("Students per Room", help="Room student assignment")
 
     availability = fields.Float(compute="_compute_check_availability",store=True, string="Avalaibility",help="Avalaibility hostal's room")
 
