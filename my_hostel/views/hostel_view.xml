@@ -59,6 +59,8 @@
                     <group>
                         <field name="description"/>
                         <!-- <field name="other"/> -->
+                        <field name="is_public"/>
+                        <field name="notes"/> 
                     </group>
                 </sheet>
             </form>
