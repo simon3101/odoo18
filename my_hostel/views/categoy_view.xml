@@ -10,7 +10,6 @@
                 <field name="parent_id"/>
                 <field name="parent_path"/>
                 <field name="child_ids"/>
-                
             </list>
         </field>
     </record>
@@ -25,18 +24,142 @@
                         string="Generate Dummy Categories"
                         class="btn-primary"/>
                 <button string="log of parent_path" name="log_parent" type="object" class="oe_highlight"/>
+                <button name="make_available" string="Make available" type="object"/>
+                <button name="make_closed" string="Close" type="object"/>
+                <field name="state" widget="statusbar"/>
             </header>
                 <sheet>
                     <group>
                         <field name="name"/>
-                        <field name="parent_id"/>
+                        <field name="parent_id" readonly='1' />
                         <field name="description"/>
                         <field name="parent_path"/>
                         <field name="child_ids"/>
+                        <field name="date_assign"/>
+                        <field name="date_end"/>
                     </group>
+                    
                 </sheet>
             </form>
         </field>
     </record>
-    
+    <record id="hostel_room_category_view_kanban" model="ir.ui.view">
+        <field name="name">Hostel Room Categories kanban</field>
+        <field name="model">hostel.category</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile" sample="1">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="parent_id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="row mb4">
+                                <div class="col-6 o_kanban_record_headings">
+                                    <strong>
+                                        <span>
+                                            <field name="name"/>
+                                        </span>
+                                    </strong>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <strong>
+                                        <i role="img" title="description"/>
+                                        <t t-esc="record.description.value"/>
+                                    </strong>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <span><field name="parent_id"/></span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="hostel_room_category_view_calendar" model="ir.ui.view">
+        <field name="name">Hostel Room Categories Calendar</field>
+        <field name="model">hostel.category</field>
+        <field name="arch" type="xml">
+            <calendar date_start="date_assign" date_stop="date_end" color="parent_id">
+                <field name="name" />
+                <field name="parent_id" />
+            </calendar>
+        </field>
+    </record>
+    <record id="hostel_room_category_view_graph" model="ir.ui.view">
+        <field name="name">Hostel Room Categories Graph</field>
+        <field name="model">hostel.category</field>
+        <field name="arch" type="xml">
+            <graph type="bar">
+                <field name="parent_id"/>
+                <field name="child_ids"/>
+            </graph>
+        </field>
+    </record>
+    <record id="hostel_room_category_view_cohort" model="ir.ui.view">
+        <field name="name">Hostel Room Categories Cohort</field>
+        <field name="model">hostel.category</field>
+        <field name="arch" type="xml">
+            <cohort date_start="date_assign" date_stop="date_end"
+                    interval="month" string="Categories Cohort" >
+            </cohort>
+        </field>
+    </record>
+    <record id="hostel_room_category_view_gantt" model="ir.ui.view">
+        <field name="name">Hostel Room Categories Gantt</field>
+        <field name="model">hostel.category</field>
+        <field name="arch" type="xml">
+            <gantt date_start="date_assign" date_stop="date_end"
+                string="Hostel Room Category" default_group_by="parent_id"
+                color="parent_id">
+                <field name="name"/>
+                <field name="parent_id"/>
+                <templates>
+                    <div t-name="gantt-popover">
+                        <ul class="pl-1 mb-0 list-unstyled">
+                            <li>
+                                <strong>Nombre: </strong>
+                                <t t-esc="name"/>
+                            </li>
+                            <li>
+                                <strong>Categoría padre: </strong>
+                                <t t-esc="parent_id[1]"/>
+                            </li>
+                        </ul>
+                    </div>
+                </templates>
+            </gantt>
+        </field>
+    </record>
+    <record id="hostel_room_category_view_activity" model="ir.ui.view">
+        <field name="name">Hostel Room Categories Activity</field>
+        <field name="model">hostel.category</field>
+        <field name="arch" type="xml">
+            <activity string="Hostel Room Category">
+                <templates>
+                    <div t-name="activity-box">
+                        <div>
+                            <field name="name" display="full"/>
+                            <field name="parent_id" muted="1" display="full"/>
+                        </div>
+                    </div>
+                </templates>
+            </activity>
+        </field>
+    </record>
+    <record id="hostel_room_category_view_map" model="ir.ui.view">
+        <field name="name">Hostel Room Categories Map</field>
+        <field name="model">hostel.category</field>
+        <field name="arch" type="xml">
+            <map>
+                <field name="name" string="Title"/>
+                <field name="parent_id" string="Hostel Room Category"/>
+            </map>
+        </field>
+    </record>
+
 </odoo>

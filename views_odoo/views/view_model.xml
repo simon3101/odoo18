@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <menuitem id="view_odoo_main_menu" name="Principal view" sequence="10"/>
+    <menuitem id="view_odoo_menu" name="View Item" action="views_odoo.view_principal_action" parent="view_odoo_main_menu" sequence="1"/>
+
+    <record id="view_principal_action" model="ir.actions.act_window">
+        <field name="name"> view.odoo.action</field>
+        <field name="res_model">view.model</field>
+        <field name="view_mode">list,form</field>
+        <field name="type">ir.actions.act_window</field>
+    </record>
+
+    <record id="view_odoo_view" model="ir.ui.view">
+        <field name="name">view.odoo</field>
+        <field name="model">view.model</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        
+        </field>
+    </record>
+</odoo>

@@ -19,6 +19,22 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hostel.room</field>
         <field name="view_mode">list,form</field>
+        <field name="context">{'lang': 'es_ES', 'default_lang': 'es_ES', 'active_test': False,'default_student_per_room': '1'}</field>
+        <field name="domain">['|', ('remarks', '=', True), ('remarks', '=', False)]</field>
+    </record>
+
+    <record id="action_hostel_room_list" model="ir.actions.act_window.view">
+        <field name="act_window_id" ref="action_hostel_two" />
+        <field name="view_id" ref="view_hostel_room_list_view" />
+        <field name="view_mode">list</field>
+        <field name="sequence" eval="1"/>
+    </record>
+
+    <record id="action_hostel_room_form" model="ir.actions.act_window.view">
+        <field name="act_window_id" ref="action_hostel_two" />
+        <field name="view_id" ref="view_hostel_room_form_view" />
+        <field name="view_mode">form</field>
+        <field name="sequence" eval="2"/>
     </record>
 
     <record id="action_hostel_three" model="ir.actions.act_window">
@@ -39,13 +55,30 @@
         <field name="name">Hostel Category</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hostel.category</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">list,form,calendar,kanban,graph,cohort,gantt,activity,map</field>
     </record>
+
     <record id="action_hostel_six" model="ir.actions.act_window">
         <field name="name">Hostel Category</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hostel.room.copy</field>
         <field name="view_mode">form</field>
     </record>
-    
+
+    <record id="action_hostel_seven" model="ir.actions.act_window">
+        <field name="name">Hostel Availability</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hostel.room.availability</field>
+        <field name="view_mode">pivot</field>
+    </record>
+    <!-- si no vamos usar el menu item tampoco ese necesario el action, se dejara por demostracion -->
+    <record id="hostel_config_settings_action" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_id" ref="base.res_config_settings_view_form"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'module' : 'my_hostel'}</field>
+    </record>
 </odoo>

@@ -1,5 +1,11 @@
+import logging
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
+
+from odoo.exceptions import UserError
+from odoo.tools.translate import _
+
+_logger = logging.getLogger(__name__)
 
 class HostelCategory(models.Model):
     _name = "hostel.category"
@@ -25,6 +31,50 @@ class HostelCategory(models.Model):
         help="Subcategories of this category"
     )
     create_category_id = fields.Many2one('hostel.category')
+
+    state = fields.Selection([
+        ('draft', 'No available'),
+        ('available', 'Available'),
+        ('closed', 'Closed')],
+        string='State',
+        default='draft'
+    )
+
+    date_assign = fields.Date(string='Assignment Date')
+    date_end = fields.Datetime(string='End Date')
+
+
+    @api.model
+    def is_allowed_transition(self, old_state, new_state):
+        # nos ayudara a verificar si el estado existe
+        allowed = [
+            ('draft', 'available'),
+            ('available', 'closed'),
+            ('closed', 'draft')
+        ]
+        
+        return (old_state, new_state) in allowed
+
+    def change_state(self, new_state):
+        # nos ayudara a cambiar el estado al que el usuario quiera
+        for room in self:
+            print(room)
+            
+            if room.is_allowed_transition(room.state, new_state): 
+                room.state = new_state
+            else:
+                _logger.exception("No tienes permiso para crear un registro con algun valor en remarks")
+                msg = _('Moving from %s to %s is not allowed') % (room.state, new_state)
+                raise UserError(msg)
+
+    def make_available(self):
+        # nos ayudara para que cuando se presione el boton cambie de estado a available
+        self.change_state('available')
+
+    def make_closed(self):
+        # nos ayudara para que cuando se presione el boton cambie el estado a closed
+        self.change_state('closed')
+    
     # Método para generar categorías ficticias
     def create_categories(self):
         # Diccionario con los valores de la primera subcategoría

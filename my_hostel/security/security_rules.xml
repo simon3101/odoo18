@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="ir.rule.user" model="ir.rule">
+        <field name="name">Hostel: see owen hostel</field>
+        <field name="model_id" ref="my_hostel.model_hostel_hostel"/>
+        <field name="groups" eval="[(4,ref('my_hostel.group_hostel_user')]"/>
+        <field name="domain_force">
+            [('is_public', '=', True)]
+        </field>
+    </record>
+
+    <record id="ir.rule.manager" model="ir.rule">
+        <field name="name">Hostel: see all hostel</field>
+        <field name="model_id" ref="my_hostel.model_hostel_hostel"/>
+        <field name="groups" eval="[(4,ref('my_hostel.group_hostel_manager')]"/>
+        <field name="domain_force">
+            [(1, '=',1)]
+        </field>
+    </record>
+</odoo>

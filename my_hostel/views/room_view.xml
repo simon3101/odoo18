@@ -7,7 +7,7 @@
         <field name="arch" type='xml'>
             <form>
                 <header>
-                    <button name="make_available" string="Make available" type="object"/>
+                    <button class="btn-default" name="make_available" string="Make available" type="object"/>
                     <button name="make_closed" string="Make Close" type="object"/>
                     <button name="log_all_room_members" string="Log Members" type="object"/>
                     <button name="update_room_no" string="Update room number" type="object"/>
@@ -23,32 +23,49 @@
                     <!-- Cap 8.3 -->
                     <button name="action_category_with_amount" string="Log Category With Amount" type="object"/>
 
+                    <button class="oe_link" type="action" name="%(my_hostel.action_hostel_five)d" string="Abrir Categoría de Habitación de Hotel" />
+                    
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
                     <group>
-                        <field name="hostel_id"/>
-                        <field name="active"/>
-                        <!--  como vemos aca el active no esta en el modelo original pero si en el abstrac model que creamos -->
-                        <field name="name"/>
-                        <field name="remarks"/>
-                        <field name="roomNo"/>
-                        <field name="floorNo"/>  
-                        <field name="rent_amount"/>
-                        <field name="currency_id"/>
-                        <field name="student_ids"/>
-                        <field name="hostel_amenities_ids"/>
-                        <field name="student_per_room"/>
-                        <!-- <field name="admission_date"/> -->
-                        <!-- <field name="discharge_date"/> -->
-                        <field name="availability"/>
-                        <!-- podemos este campo de duration para que solo se visualice -->
-                        <!-- <field name="duration" readonly="1"/> -->
-                        <field name="previous_room_id" />
-                        <field name="authored_book_ids"/>
-                        <!-- <field name="category_id"/>d -->
-                        <!-- <field name="cost_price"/> -->
-                    </group>  
+                        <group string="General">
+                            <field name="hostel_id"/>
+                            <field name="active"/>
+                            <field name="name"/>
+                            <field name="roomNo"/>
+                        </group>
+                        <group string="Details">
+                            <field name="floorNo"/>  
+                            <field name="rent_amount"/>
+                            <field name="currency_id"/>
+                            <field name="student_per_room"/>
+                            <field name="availability"/>
+                            <!-- <field name="admission_date"/> -->
+                            <!-- <field name="duration" readonly="1"/> -->
+                            <!-- <field string='Category Id' name="category_id"/>d -->
+                            <!-- <field name="cost_price"/> -->
+                            <!-- <field name="discharge_date"/> -->
+                            <!-- podemos este campo de duration para que solo se visualice -->
+                        </group>
+                    </group>
+                    <group string="Comment">
+                            <field name="remarks" string="Remarks" />
+                        </group>
+
+                    <notebook>
+                        <page name="students" string="Students">
+                            <field name="student_ids"/>
+                        </page>
+
+                        <page name="amenities" string="Amenities">
+                            <field name="hostel_amenities_ids"/>
+                        </page>
+                        
+                        <page name="athored_books" string="Autored Books">
+                            <field name="authored_book_ids"/>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
@@ -58,18 +75,74 @@
         <field name="name">hostel.room.list.view</field>
         <field name="model">hostel.room</field>
         <field name="arch" type="xml">
-            <list>
-                <field name="name"/>    
-                <field name="hostel_id"/>
-                <field name="roomNo"/>
+            <list >
+                <field name="name" />    
+                <field name="hostel_id" optional="show"/>
+                <field name="roomNo" />
                 <field name="floorNo"/>
                 <field name="rent_amount"/>
                 <field name="currency_id"/>
                 <field name="student_ids"/>
                 <field name="hostel_amenities_ids"/>
-                <field name="authored_book_ids"/>
-                <field name="state" widget="statusbar"/>
+                <field name="authored_book_ids" optional="hide"/>
+                <field name="state"/>
             </list>
         </field>
     </record>
+    <record id="hostel_room_view_search" model="ir.ui.view">
+        <field name="model">hostel.room</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="roomNo"/>
+                <field name="state"/>
+                <searchpanel>
+                    <field name="state" expand="1" select="multi" 
+                            icon="fa-check-square-o" enable_counters="1" />
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+    <!-- Vistas heredadas a parnert -->
+    <!-- Vista heredada al form -->
+    <record id="hostel_room_view_form_inherit" model="ir.ui.view">
+        <field name="name">Hostel Room Form Inherit</field>
+        <field name="model">hostel.room</field>
+        <field name="inherit_id" ref="my_hostel.view_hostel_room_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//form[1]" position="inside">
+                <field name="roomNo"/>
+            </xpath>
+            <xpath expr="//group[1]" position="after">
+                <group>
+                    <field name="remarks"/>
+                    <field name="availability"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <!-- Vista heredada al la busqueda predeterminada -->
+    <record id="hostel_room_view_search_inherit" model="ir.ui.view">
+        <field name="name">Hostel Room Search inherit</field>
+        <field name="model">hostel.room</field>
+        <field name="inherit_id" ref="my_hostel.hostel_room_view_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//search[1]" position="inside">
+            <field name="availability"></field>
+            </xpath>
+        </field>
+    </record>
+    <!-- Vista heredada a la vista -->
+    <record id="hostel_room_view_tree_inherit" model="ir.ui.view">
+        <field name="name">Hostel Room List Inherit</field>
+        <field name="model">hostel.room</field>
+        <field name="inherit_id" ref="my_hostel.view_hostel_room_list_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+            <field name="roomNo"/>
+            </xpath>
+        </field>
+    </record>
+
+
 </odoo>

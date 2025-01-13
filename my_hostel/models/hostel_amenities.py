@@ -14,4 +14,4 @@ class HostelAmenities(models.Model):
         default=True,
         help="Activate or deactivate this amenity"
     )
-    # amenities_id = fields.Many2one("",string="amenity",help="Amenities that have the hostel")
+

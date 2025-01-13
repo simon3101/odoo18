@@ -19,6 +19,7 @@ class HostelRoom(models.Model):
     _inherit = ['base.archive']
     # _rec_names_search = ["id","name","roomNo"]
 
+    user_id = fields.Many2one('res.users', string='User')
     remarks = fields.Char('Remarks')
     #Aca la relacion es de, muchas habitaciones que tiene un hotel (many), hay solo un hotel, por lo tanto el campo es Many2one
     hostel_id = fields.Many2one(
@@ -67,6 +68,8 @@ class HostelRoom(models.Model):
     category_id = fields.Many2one('hostel.category')
 
     previous_room_id = fields.Many2one('hostel.room', string='Previous Room')
+
+
 
     def find_room(self):
         print(self.category_id.name)
@@ -226,8 +229,7 @@ class HostelRoom(models.Model):
             raise UserError(
                     'No se esta haciendo la busqueda como deberia".'
                 )
-        return super(HostelRoom, self)._name_search(
-            name=name, args=args, operator=operator, limit=limit, name_get_uid=name_get_uid)
+        return super(HostelRoom, self)._name_search(name=name, args=args, operator=operator, limit=limit, name_get_uid=name_get_uid)
     
     @api.model
     def _get_average_cost(self,room):

@@ -4,7 +4,7 @@
         <field name="name">hostel.student.list.view</field>
         <field name="model">hostel.student</field>
         <field name="arch" type="xml">
-            <list>
+            <list editable='bottom'>
                 <field name="name"/>
                 <field name="gender"/>
                 <field name="active"/>
@@ -13,7 +13,7 @@
                 <!-- cap 8 -->
                 <field name="duration"/>
                 <field name="duration_month"/>
-                <field name="status" widget="statusbar"/>
+                <field name="status"/>
             </list>
         </field>
     </record>
@@ -31,7 +31,7 @@
                     <button string="Make cancel" name="make_cancel" type="object"/>
                     <button name="action_assign_room" string="Assign Room" type="object"  class="btn-primary"/>   
                     <button string="Return room" name="return_room"  type="object" />
-                    
+                    <button string="add room in student" name="add_room_in_student_wizard" type="object" />
                     <field name="status" widget="statusbar"/>
                 </header>
                 <sheet>

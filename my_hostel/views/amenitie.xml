@@ -4,9 +4,9 @@
         <field name="name">hostel.amenitie.list.view</field>
         <field name="model">hostel.amenities</field>
         <field name="arch" type="xml">
-            <list>
+            <list editable='top'>
                 <field name="name"/>
-                <field name="active"/>  
+                <field name="active"/> 
             </list>
         </field>
     </record>

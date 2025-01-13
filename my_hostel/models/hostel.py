@@ -54,12 +54,11 @@ class Hostel(models.Model):
 	# hostel_rating = fields.Float('Hostel Average Rating', digits=(14, 4)) Metodo 1
 	hostel_rating = fields.Float('Hostel Average Rating', digits='Rating Value' ) # Metodo 2
 	
-	ref_doc_id = fields.Reference(
-	selection='_referencable_models',
-	string='Reference document'
-	)
+	ref_doc_id = fields.Reference(selection='_referencable_models',string='Reference document')
 	
+	is_public = fields.Boolean(string="Public",groups="my_hostel.group_hostel_manager")
 
+	notes = fields.Text(string="Some Text",groups="my_hostel.group_hostel_manager")
 	# category_id = fields.Many2one('hostel.category')
 	@api.depends('hostel_code')
 	def _compute_display_name(self):
