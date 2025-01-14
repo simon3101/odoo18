@@ -13,7 +13,7 @@
         "security/ir.model.access.csv",
         "data/data.xml",
         "data/category_data.xml",
-        "views/actions.xml",
+        "wizards/assign_room_student_wizard_view.xml",
         "views/res_partner.xml",
         "views/hostel_view.xml",  
         "views/student_view.xml",
@@ -23,9 +23,6 @@
         "views/room_view.xml",
         "views/hostel_room_availability.xml",
         "views/config_view.xml",
-        "views/res_config_settings.xml",
-        "views/menus.xml",
-        "wizards/assign_room_student_wizard_view.xml",
 	],
     'assets':{
         #'web.assets_backend': ['web/static/src/xml/**/*',],

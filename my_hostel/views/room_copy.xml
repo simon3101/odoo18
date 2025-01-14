@@ -1,5 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
+    <!-- Action -->
+    <record id="action_hostel_copy" model="ir.actions.act_window">
+        <field name="name">Hostel Category</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hostel.room.copy</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <!-- views -->
     <record id="view_hostel_room_view" model="ir.ui.view">
         <field name="name"> hostel.room.form.view</field>
         <field name="model">hostel.room.copy</field>
@@ -27,4 +36,7 @@
             </form>
         </field>
     </record>
+
+    <!-- Menu -->
+    <menuitem id="hostel_copy" name="Hostel copy" action="action_hostel_copy" parent="hostel_main_menu" />
 </odoo>

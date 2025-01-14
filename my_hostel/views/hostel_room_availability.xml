@@ -1,5 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
+
+    <!-- action -->
+    <record id="action_hostel_availability" model="ir.actions.act_window">
+        <field name="name">Hostel Availability</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hostel.room.availability</field>
+        <field name="view_mode">pivot</field>
+    </record>
+    
+    <!-- views -->
     <record id="hostel_room_avalability_pivot_view" model="ir.ui.view">
         <field name="name">hostel.room.availability.pivot</field>
         <field name="model">hostel.room.availability</field>
@@ -10,4 +20,7 @@
             </pivot>
         </field>
     </record>
+
+    <!-- Menu -->
+    <menuitem id="hostel_room_availability" name="Hostel Availability" action="action_hostel_availability" parent="hostel_main_menu" />
 </odoo>

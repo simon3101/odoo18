@@ -7,7 +7,7 @@ class ResConfigSettings(models.TransientModel):
         implied_group='my_hostel.group_hostel_user',
     )
     group_start_date = fields.Boolean( "Manage Start Date",  
-        group='base.group_user',  
+        groups='base.group_user',  
         implied_group='my_hostel.group_start_date',  
     )
 
