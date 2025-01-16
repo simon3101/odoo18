@@ -6,23 +6,9 @@
         <field name="name">Hostel Room</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hostel.room</field>
-        <field name="view_mode">list,form</field>
-        <field name="context">{'lang': 'es_ES', 'default_lang': 'es_ES', 'active_test': False,'default_student_per_room': '1'}</field>
-        <field name="domain">['|', ('remarks', '=', True), ('remarks', '=', False)]</field>
-    </record>
-
-    <record id="action_hostel_room_list" model="ir.actions.act_window.view">
-        <field name="act_window_id" ref="action_hostel_room" />
-        <field name="view_id" ref="my_hostel.view_hostel_room_list_view" />
-        <field name="view_mode">list</field>
-        <field name="sequence" eval="1"/>
-    </record>
-
-    <record id="action_hostel_room_form" model="ir.actions.act_window.view">
-        <field name="act_window_id" ref="action_hostel_room" />
-        <field name="view_id" ref="view_hostel_room_form_view" />
-        <field name="view_mode">form</field>
-        <field name="sequence" eval="2"/>
+        <field name="view_mode">list,form,kanban</field>
+        <field name="context">{'lang': 'es_ES', 'default_lang': 'es_ES', 'active_test': False}</field>
+        <!-- <field name="domain">['|', ('remarks', '=', True), ('remarks', '=', False)]</field> -->
     </record>
 
     <!-- Views -->
@@ -32,8 +18,8 @@
         <field name="arch" type='xml'>
             <form>
                 <header>
-                    <button class="btn-default" name="make_available" string="Make available" type="object"/>
-                    <button name="make_closed" string="Make Close" type="object"/>
+                    <!-- <button class="btn-default" name="make_available" string="Make available" type="object"/> -->
+                    <!-- <button name="make_closed" string="Make Close" type="object"/> -->
                     <button name="log_all_room_members" string="Log Members" type="object"/>
                     <button name="update_room_no" string="Update room number" type="object"/>
                     <button name="find_room" string="Find room" type="object"/>
@@ -48,7 +34,8 @@
 
                     <button class="oe_link" type="action" name="%(my_hostel.action_hostel_category)d" string="Abrir Categoría de Habitación de Hotel" />
                     
-                    <field name="state" widget="statusbar"/>
+                    <!-- <field name="state" widget="statusbar"/> -->
+                    <field name="stage_id" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}"/>
                 </header>
                 <sheet>
                     <group>
@@ -108,7 +95,7 @@
                 <field name="student_ids"/>
                 <field name="hostel_amenities_ids"/>
                 <field name="authored_book_ids" optional="hide"/>
-                <field name="state"/>
+                <field name="stage_id"/>
             </list>
         </field>
     </record>
@@ -118,9 +105,9 @@
             <search>
                 <field name="name" />
                 <field name="roomNo"/>
-                <field name="state"/>
+                <field name="stage_id"/>
                 <searchpanel>
-                    <field name="state" expand="1" select="multi" 
+                    <field name="stage_id" expand="1" select="multi" 
                             icon="fa-check-square-o" enable_counters="1" />
                 </searchpanel>
             </search>
@@ -165,8 +152,53 @@
             </xpath>
         </field>
     </record>
-    
-    <!-- Views -->
+
+    <record id="hostel_room_view_kanban" model="ir.ui.view">
+        <field name="name">Hostel room Kanban</field>
+        <field name="model">hostel.room</field>
+        <field name="arch" type="xml">
+            <kanban group_create="False" default_group_by="stage_id" on_create="quick_create" quick_create_view="my_hostel.hostel_room_form_kanban">
+                <field name="stage_id" />
+                <field name="color"/>
+                <progressbar field="popularity" colors='{"low": "success", "medium": "warning", "high": "danger"}'/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_content">
+                                <div class="oe_kanban_card">
+                                    <div>
+                                        <b>
+                                            <field name="name" />
+                                        </b>
+                                    </div>
+                                    <div class="text-muted">
+                                        <i class="fa fa-building"/>
+                                        <field name="hostel_id" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_hostel_room_list" model="ir.actions.act_window.view">
+        <field name="act_window_id" ref="action_hostel_room" />
+        <field name="view_id" ref="my_hostel.view_hostel_room_list_view" />
+        <field name="view_mode">list</field>
+        <field name="sequence" eval="1"/>
+    </record>
+
+    <record id="action_hostel_room_form" model="ir.actions.act_window.view">
+        <field name="act_window_id" ref="action_hostel_room" />
+        <field name="view_id" ref="view_hostel_room_form_view" />
+        <field name="view_mode">form</field>
+        <field name="sequence" eval="2"/>
+    </record>
+
+    <!-- Action -->
     <menuitem id="room_form_menu" name="Room" action="action_hostel_room" parent="hostel_main_menu" />
 
 

@@ -19,6 +19,15 @@ class HostelRoom(models.Model):
     _inherit = ['base.archive']
     # _rec_names_search = ["id","name","roomNo"]
 
+    @api.model
+    def _default_room_stage(self):
+        Stage = self.env['hostel.room.stage']
+        return Stage.search([], limit=1)
+
+    @api.model
+    def _group_expand_stages(self, stages,domain):
+        return stages.search([])
+
     user_id = fields.Many2one('res.users', string='User')
     remarks = fields.Char('Remarks')
     #Aca la relacion es de, muchas habitaciones que tiene un hotel (many), hay solo un hotel, por lo tanto el campo es Many2one
@@ -57,18 +66,26 @@ class HostelRoom(models.Model):
 
     authored_book_ids = fields.Many2many("res.partner")
 
-    state = fields.Selection([
-        ('draft', 'No available'),
-        ('available', 'Available'),
-        ('closed', 'Closed')],
-        string='State',
-        default='draft'
+    # state = fields.Selection([
+    #     ('draft', 'No available'),
+    #     ('available', 'Available'),
+    #     ('closed', 'Closed')],
+    #     string='State',
+    #     default='draft'
+    # )
+
+    stage_id = fields.Many2one(
+        'hostel.room.stage',
+        default=_default_room_stage,
+        group_expand='_group_expand_stages'
     )
 
     category_id = fields.Many2one('hostel.category')
 
     previous_room_id = fields.Many2one('hostel.room', string='Previous Room')
 
+    color = fields.Integer()
+    popularity = fields.Selection([('no', 'No Demand'), ('low', 'Low Demand'), ('medium', 'Average Demand'), ('high', 'High Demand'),])
 
 
     def find_room(self):
@@ -116,36 +133,36 @@ class HostelRoom(models.Model):
             raise ValidationError(("the month rent amount can't be negative!"))
 
             
-    @api.model
-    def is_allowed_transition(self, old_state, new_state):
-        # nos ayudara a verificar si el estado existe
-        allowed = [
-            ('draft', 'available'),
-            ('available', 'closed'),
-            ('closed', 'draft')
-        ]
+    # @api.model
+    # def is_allowed_transition(self, old_state, new_state):
+    #     # nos ayudara a verificar si el estado existe
+    #     allowed = [
+    #         ('draft', 'available'),
+    #         ('available', 'closed'),
+    #         ('closed', 'draft')
+    #     ]
         
-        return (old_state, new_state) in allowed
+    #     return (old_state, new_state) in allowed
 
-    def change_state(self, new_state):
-        # nos ayudara a cambiar el estado al que el usuario quiera
-        for room in self:
-            print(room)
+    # def change_state(self, new_state):
+    #     # nos ayudara a cambiar el estado al que el usuario quiera
+    #     for room in self:
+    #         print(room)
             
-            if room.is_allowed_transition(room.state, new_state): 
-                room.state = new_state
-            else:
-                _logger.exception("No tienes permiso para crear un registro con algun valor en remarks")
-                msg = _('Moving from %s to %s is not allowed') % (room.state, new_state)
-                raise UserError(msg)
+    #         if room.is_allowed_transition(room.state, new_state): 
+    #             room.state = new_state
+    #         else:
+    #             _logger.exception("No tienes permiso para crear un registro con algun valor en remarks")
+    #             msg = _('Moving from %s to %s is not allowed') % (room.state, new_state)
+    #             raise UserError(msg)
 
-    def make_available(self):
-        # nos ayudara para que cuando se presione el boton cambie de estado a available
-        self.change_state('available')
+    # def make_available(self):
+    #     # nos ayudara para que cuando se presione el boton cambie de estado a available
+    #     self.change_state('available')
 
-    def make_closed(self):
-        # nos ayudara para que cuando se presione el boton cambie el estado a closed
-        self.change_state('closed')
+    # def make_closed(self):
+    #     # nos ayudara para que cuando se presione el boton cambie el estado a closed
+    #     self.change_state('closed')
 
     def filter_members(self):
         all_rooms = self.search([])
