@@ -16,7 +16,7 @@ class HostelRoom(models.Model):
     #Esto que sigue son validades A nivel de SQL que puede tomar el programa
     _sql_constraints = [("room_no_unique", "unique(room_no)", "Room number must beunique!")]
     #("name", "Codigo sql", "Mensaje que mostrara")
-    _inherit = ['base.archive']
+    _inherit = ['base.archive','mail.thread', 'mail.activity.mixin']
     # _rec_names_search = ["id","name","roomNo"]
 
     @api.model
@@ -35,7 +35,7 @@ class HostelRoom(models.Model):
         'hostel.hostel',#Nombre del modelo, en este caso del hostel hostel
         string='Hostel',#Nombre en la vista del modelo
         help='Name of my the hostel '
-        )
+    )
 
     name = fields.Char("Room Name",required=True)
     roomNo = fields.Integer("Room No")

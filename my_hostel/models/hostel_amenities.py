@@ -14,4 +14,4 @@ class HostelAmenities(models.Model):
         default=True,
         help="Activate or deactivate this amenity"
     )
-
+    color = fields.Integer()

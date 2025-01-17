@@ -160,8 +160,14 @@
             <kanban group_create="False" default_group_by="stage_id" on_create="quick_create" quick_create_view="my_hostel.hostel_room_form_kanban">
                 <field name="stage_id" />
                 <field name="color"/>
-                <progressbar field="popularity" colors='{"low": "success", "medium": "warning", "high": "danger"}'/>
+                <progressbar field="popularity" colors='{"draft": "success", "Reserved": "Available", "high": "danger"}'/>
                 <templates>
+                    <t t-name="kanban-menu" groups="base.group_user">
+                        <a t-if="widget.editable" role="menuitem" type="edit" class="dropdown-item">Edit</a>
+                        <a t-if="widget.deletable" role="menuitem" type="delete" class="dropdown-item">Delete</a>
+                        <ul class="oe_kanban_colorpicker" data-field="color"/>
+                        <div role="separator" class="dropdown-divider"></div>
+                    </t>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
                             <div class="oe_kanban_content">
@@ -174,6 +180,15 @@
                                     <div class="text-muted">
                                         <i class="fa fa-building"/>
                                         <field name="hostel_id" />
+                                    </div>
+                                    <span class="oe_kanban_list_many2many">
+                                            
+                                    </span>
+                                    <div>
+                                        <field name="popularity" widget="priority"/>
+                                    </div>
+                                    <div>
+                                        <field name="activity_ids" widget="kanban_activity"/>
                                     </div>
                                 </div>
                             </div>

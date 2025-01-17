@@ -43,6 +43,13 @@ class Hostel(models.Model):
 	details_added = fields.Text( string="Details", groups='my_hostel.group_hostel_manager')
 	# category_id = fields.Many2one('hostel.category')
 	
+	rooms_count = fields.Integer(compute="_compute_rooms_count")
+
+	def _compute_rooms_count(self):
+		room_obj = self.env['hostel.room']
+		for hostel in self:
+			hostel.rooms_count = room_obj.search_count([('hostel_id', '=', hostel.id)])
+
 	def add_details(self):
 		self.ensure_one()
 		message = "Details are (added by: %s)" % self.env.user.name

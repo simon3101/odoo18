@@ -6,7 +6,7 @@
     'website': "http://www.example.com",
     'category': 'hostel',
     'version': '18.0.1.2',
-    'depends': ['base','web_cohort','web_gantt','mail','web_map','base_setup'],
+    'depends': ['base','mail','web_cohort','web_gantt','mail','web_map','base_setup'],
     'data': [
         "security/hostel_security.xml",
         "security/security_rules.xml",
@@ -14,6 +14,8 @@
         "data/data.xml",
         "data/category_data.xml",
         "wizards/assign_room_student_wizard_view.xml",
+        "reports/hostel_room_detail_report_template.xml",
+        "reports/hostel_room_detail_report.xml",
         "views/res_partner.xml",
         "views/hostel_view.xml",  
         "views/student_view.xml",

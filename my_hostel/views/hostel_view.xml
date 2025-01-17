@@ -26,6 +26,12 @@
                     <button string="Add details" name="add_details" type="object"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="%(action_hostel_room)d" type="action" icon="fa-building" context="{'search_default_hostel_id': 'active_id'}">
+                            <field string="Rooms" name="rooms_count" widget="statinfo"/>
+                        </button>
+                    </div>
+
                     <div class="oe_title">
                         <h3>
                             <table>
@@ -63,7 +69,7 @@
                         </group>
                         <group>
                             <field name="hostel_floors"/>
-                            <field name="active"/>
+                            <field name="active" invisible="1"/>
                             <field name="type"/>
                             <field name="hostel_rating"/>
                             <field name="other_info"/>
