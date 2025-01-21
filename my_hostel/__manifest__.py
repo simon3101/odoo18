@@ -15,7 +15,7 @@
         "data/category_data.xml",
         "wizards/assign_room_student_wizard_view.xml",
         "reports/hostel_room_detail_report_template.xml",
-        "reports/hostel_room_detail_report.xml",
+        "reports/hostel_actions_report.xml",
         "views/res_partner.xml",
         "views/hostel_view.xml",  
         "views/student_view.xml",
