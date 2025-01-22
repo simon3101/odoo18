@@ -27,7 +27,7 @@
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button class="oe_stat_button" name="%(action_hostel_room)d" type="action" icon="fa-building" context="{'search_default_hostel_id': 'active_id'}">
+                        <button class="oe_stat_button" name="%(my_hostel.action_hostel)d" type="action" icon="fa-building" context="{'search_default_hostel_id': 'active_id'}">
                             <field string="Rooms" name="rooms_count" widget="statinfo"/>
                         </button>
                     </div>

@@ -28,8 +28,8 @@
 </template>
 
 <template id="hostel_room_reports_template">
-    <t t-call="web.html_container">
-        <t t-foreach="docs" t-as="doc">
+    <t t-foreach="docs" t-as="doc">
+        <t t-call="web.html_container">
             <t t-call="web.external_layout">
                 <div class="page">
                     <span>Room# <t t-esc="doc.roomNo"/></span>
@@ -65,16 +65,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                                <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"/>
+                                <!-- <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"/> -->
                                 <tr >
-                                    <td><span t-field="doc.previous_room_id.name"/></td>
-                                    <!-- <t-if="doc.students_ids" >
-                                        <td><span t-field="len(doc.students_ids)"/></td>
+                                    <t t-foreach="doc.previous_room_id" t-as="room">
+                                        <td><span t-field="doc.name"/></td>
+                                            <!-- <td><span t-field="len(doc.students_ids)"/></td>
+                                            <td><span t-field="len(doc.hostel_amenities_ids)"/></td> -->
+                                        <td><span t-field="doc.rent_amount"/></td>    
                                     </t>
-                                    <t-if="doc.hostel_amenities_ids" >
-                                        <td><span t-field="len(doc.hostel_amenities_ids)"/></td>
-                                    </t> -->
-                                    <td><span t-field="doc.rent_amount"/></td>
                                 </tr>
                         </tbody>
                     </table>
