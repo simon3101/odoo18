@@ -18,8 +18,8 @@
         <field name="arch" type='xml'>
             <form>
                 <header>
-                    <!-- <button class="btn-default" name="make_available" string="Make available" type="object"/> -->
-                    <!-- <button name="make_closed" string="Make Close" type="object"/> -->
+                    <button class="btn-default" name="make_available" string="Make available" type="object"/>
+                    <button name="make_closed" string="Make Close" type="object"/>
                     <button name="log_all_room_members" string="Log Members" type="object"/>
                     <button name="update_room_no" string="Update room number" type="object"/>
                     <button name="find_room" string="Find room" type="object"/>

@@ -32,28 +32,26 @@
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
                 <div class="page">
-                    <span>Room# <t t-esc="doc.roomNo"/></span>
-                    <!-- <div class="row mb-4" id="informations">
-                        
-                        <div t-if="doc.client_order_ref" class="col" name="informations_reference">
-                            <strong>Your Reference</strong>
-                            <div t-field="doc.client_order_ref">SO0000</div>
+                    <div class="row mb-4" id="informations">
+                        <div class="col" >
+                            <strong>User</strong>
+                            <div>Infor about rooms</div>
                         </div>
 
-                        <div t-if="doc.date_order" class="col" name="informations_date">
-                            <strong>Order Date</strong>
-                            <div t-field="doc.date_order" t-options='{"widget": "date"}'>2023-12-31</div>
+                        <div class="col" >
+                            <strong>Date report created</strong>
+                            <div t-field="doc.student_ids.admission_date" >2023-12-31</div>
                         </div>
                         
-                        <div t-if="doc.user_id.name" class="col">
-                            <strong>Salesperson</strong>
-                            <div t-field="doc.user_id">Mitchell Admin</div>
+                        <div class="col">
+                            <strong>Report's person</strong>
+                            <div t-field="doc.user_id.name">Mitchell Admin</div>
                         </div>
-                    </div> -->
+                    </div>
 
-                    <!-- <t t-set="lines_to_report" t-value="doc._get_order_lines_to_report()"/> -->
-
-                    
+                    <!-- Almacenamos todas las habitaciones -->
+                    <t t-set="rooms" t-value="doc.log_all_room_members()"/>
+                    <!-- Tabla que mostrara los datos -->
                     <table class="table table-borderless ">
                         <thead>
                             <tr>
@@ -65,31 +63,47 @@
                             </tr>
                         </thead>
                         <tbody>
-                                <!-- <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"/> -->
-                                <tr >
-                                    <t t-foreach="doc.previous_room_id" t-as="room">
-                                        <td><span t-field="doc.name"/></td>
-                                            <!-- <td><span t-field="len(doc.students_ids)"/></td>
-                                            <td><span t-field="len(doc.hostel_amenities_ids)"/></td> -->
-                                        <td><span t-field="doc.rent_amount"/></td>    
-                                    </t>
-                                </tr>
+                            <!-- Creamos una fila para cada habitacion-->
+                            <t t-foreach="rooms" t-as="room">
+                                <tr>
+                                        <t t-if="room.hostel_id.name">
+                                            <td><span> <t t-esc="room.hostel_id.name"/> </span> </td>
+                                        </t>
+                                        <t t-else="">
+                                            <td><span> Unknow name</span> </td>
+                                        </t>
+
+                                        <td><span> <t t-esc="room.name"/> </span></td>
+                                        <!-- <td><span> <t t-esc="count_amenities"/> </span></td> -->
+                                        <td><span> <t t-esc="len(room.student_ids)"/> </span></td>
+                                        <td><span> <t t-esc="len(room.hostel_amenities_ids)"/></span></td>
+                                        <td>
+                                            <span> 
+                                                <t t-esc="room.rent_amount"/>  
+                                                
+                                                <t t-esc="room.currency_id.symbol" />
+                                            </span>
+                                        </td>
+                                </tr>   
+                            </t>   
                         </tbody>
                     </table>
-<!--                     
+
                     <div class="clearfix" name="so_total_summary">
                         <div id="total" class="row mt-n3" name="total">
                             <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ms-auto">
-                                <table class="o_total_table table table-borderless"> -->
-                                    <!-- Tax totals -->
-                                    <!-- <t t-call="sale.document_tax_totals">
-                                        <t t-set="tax_totals" t-value="doc.tax_totals"/>
-                                        <t t-set="currency" t-value="doc.currency_id"/>
-                                    </t>
+                                <table class="o_total_table table table-borderless">
+                                    <tr>
+                                        <td>Total Factured</td>
+                                        <td class="text-end">
+                                            <!-- Sumamos el total de alquiler de cada habitacion -->
+                                            <span><t t-esc="doc.sum_rent_amount()"/>$</span>$
+                                        </td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </t>
         </t>

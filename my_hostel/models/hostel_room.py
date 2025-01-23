@@ -89,7 +89,6 @@ class HostelRoom(models.Model):
     color = fields.Integer()
     popularity = fields.Selection([('no', 'No Demand'), ('low', 'Low Demand'), ('medium', 'Average Demand'), ('high', 'High Demand'),])
 
-
     def find_room(self):
         print(self.category_id.name)
         domain = [
@@ -117,7 +116,8 @@ class HostelRoom(models.Model):
         hostel_room_obj = self.env['hostel.room']
         all_members = hostel_room_obj.search([])
         print("TODOS LOS MIEMBROS:", all_members)
-        return True
+        print(dir(fields))
+        return all_members
 
     def update_room_no(self):
         self.roomNo = self.id
@@ -293,4 +293,10 @@ class HostelRoom(models.Model):
         result = self.env.cr.fetchall()
         _logger.warning("Hostel Room With Amount: %s", result)
 
-    
+    def sum_rent_amount(self):
+        sum = 0
+        all_rooms = self.search([])
+        for room in all_rooms:
+            sum += room.rent_amount
+        return sum
+        
