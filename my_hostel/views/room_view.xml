@@ -220,7 +220,7 @@
     </record>
 
     <!-- Action -->
-    <menuitem id="room_form_menu" name="Room" action="action_hostel_room" parent="hostel_main_menu" groups="my_hostel.group_hostel_manager"/>
+    <!-- <menuitem id="room_form_menu" name="Room" action="action_hostel_room" parent="hostel_main_menu" groups="my_hostel.group_hostel_manager"/> -->
 
 
 </odoo>
