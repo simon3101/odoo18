@@ -6,6 +6,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hostel.hostel</field>
         <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="search_hostel_view"/>
         <!-- Si colocamos este filtro mostraremos campos inactivos -->
         <!-- <field name="domain">[('active', '=', True)]</field> -->
         <field name="help" type="html">
@@ -103,6 +104,25 @@
                 <!-- <field name="category_id"/> -->
                 <field name="ref_doc_id"/>
             </list>
+        </field>
+    </record>
+
+    <record id="search_hostel_view" model="ir.ui.view">
+        <field name="name">hoste.hostel.search.view</field>
+        <field name="model">hostel.hostel</field>
+        <field name="arch" type="xml">
+            <search>
+
+                <!-- Filtros que se buscaran -->
+                <field name="is_public" string='public'/>
+                <!-- Filtros rapidos -->
+                <filter name="is_public" string="is public" domain="[('is_public', '=', False)]" groups ="my_hostel.group_hostel_manager"/>
+                <!-- Grupo de busqueda avanzada -->
+                <group expand="1">
+                    <filter name="name" string="Advanced Search" domain="[('active','=',False)]"/>
+                </group>
+
+            </search>
         </field>
     </record>
 
