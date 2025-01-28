@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="hostel_room_detail_reports_template">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <h1>Room name: <t t-esc="doc.name"/></h1>
+                    <h1>Room No: <t t-esc="doc.name"/></h1>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Gender</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="doc.student_ids" t-as="student">
+                                <td><t t-esc="student.name" /></td>
+                                <td><t t-esc="student.gender" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+
+<template id="hostel_room_reports_template">
+    <t t-foreach="docs" t-as="doc">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="row mb-4" id="informations">
+                        <div class="col" >
+                            <strong>User</strong>
+                            <div>Infor about rooms</div>
+                        </div>
+
+                        <div class="col" >
+                            <strong>Date report created</strong>
+                            <div t-field="doc.student_ids.admission_date" >2023-12-31</div>
+                        </div>
+                        
+                        <div class="col">
+                            <strong>Report's person</strong>
+                            <div t-field="doc.user_id.name">Mitchell Admin</div>
+                        </div>
+                    </div>
+
+                    <!-- Almacenamos todas las habitaciones -->
+                    <t t-set="rooms" t-value="doc.log_all_room_members()"/>
+                    <!-- Tabla que mostrara los datos -->
+                    <table class="table table-borderless ">
+                        <thead>
+                            <tr>
+                                <th><b>Hotel</b></th>
+                                <th><b>Room name</b></th>
+                                <th><b>Quantity of students</b></th>
+                                <th><b>Amenities</b></th>
+                                <th><b>Rent amount</b></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Creamos una fila para cada habitacion-->
+                            <t t-foreach="rooms" t-as="room">
+                                <tr>
+                                        <t t-if="room.hostel_id.name">
+                                            <td><span> <t t-esc="room.hostel_id.name"/> </span> </td>
+                                        </t>
+                                        <t t-else="">
+                                            <td><span> Unknow name</span> </td>
+                                        </t>
+
+                                        <td><span> <t t-esc="room.name"/> </span></td>
+                                        <!-- <td><span> <t t-esc="count_amenities"/> </span></td> -->
+                                        <td><span> <t t-esc="len(room.student_ids)"/> </span></td>
+                                        <td><span> <t t-esc="len(room.hostel_amenities_ids)"/></span></td>
+                                        <td>
+                                            <span> 
+                                                <t t-esc="room.rent_amount"/>  
+                                                
+                                                <t t-esc="room.currency_id.symbol" />
+                                            </span>
+                                        </td>
+                                </tr>   
+                            </t>   
+                        </tbody>
+                    </table>
+
+                    <div class="clearfix" name="so_total_summary">
+                        <div id="total" class="row mt-n3" name="total">
+                            <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ms-auto">
+                                <table class="o_total_table table table-borderless">
+                                    <tr>
+                                        <td>Total Factured</td>
+                                        <td class="text-end">
+                                            <!-- Sumamos el total de alquiler de cada habitacion -->
+                                            <span><t t-esc="doc.sum_rent_amount()"/>$</span>$
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+
+
+
+</odoo>

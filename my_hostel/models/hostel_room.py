@@ -16,8 +16,10 @@ class HostelRoom(models.Model):
     #Esto que sigue son validades A nivel de SQL que puede tomar el programa
     _sql_constraints = [("room_no_unique", "unique(room_no)", "Room number must beunique!")]
     #("name", "Codigo sql", "Mensaje que mostrara")
-    _inherit = ['base.archive']
+    _inherit = ['base.archive','mail.thread', 'mail.activity.mixin']
     # _rec_names_search = ["id","name","roomNo"]
+
+    
 
     user_id = fields.Many2one('res.users', string='User')
     remarks = fields.Char('Remarks')
@@ -26,7 +28,7 @@ class HostelRoom(models.Model):
         'hostel.hostel',#Nombre del modelo, en este caso del hostel hostel
         string='Hostel',#Nombre en la vista del modelo
         help='Name of my the hostel '
-        )
+    )
 
     name = fields.Char("Room Name",required=True)
     roomNo = fields.Integer("Room No")
@@ -51,7 +53,7 @@ class HostelRoom(models.Model):
         help="Select hostel room amenities"
     )
     
-    student_per_room = fields.Integer("Students per Room", required=True, help="Room student assignment",default=0)
+    student_per_room = fields.Integer("Students per Room", help="Room student assignment")
 
     availability = fields.Float(compute="_compute_check_availability",store=True, string="Avalaibility",help="Avalaibility hostal's room")
 
@@ -65,11 +67,27 @@ class HostelRoom(models.Model):
         default='draft'
     )
 
+    # @api.model
+    # def _default_room_stage(self):
+    #     Stage = self.env['hostel.room.stage']
+    #     return Stage.search([])
+
+    # @api.model
+    # def _group_expand_stages(self, stages,domain):
+    #     return stages.search([])
+
+    # stage_id = fields.Many2one(
+    #     'hostel.room.stage',
+    #     default=_default_room_stage,
+    #     group_expand='_group_expand_stages'
+    # )
+
     category_id = fields.Many2one('hostel.category')
 
     previous_room_id = fields.Many2one('hostel.room', string='Previous Room')
 
-
+    color = fields.Integer()
+    popularity = fields.Selection([('no', 'No Demand'), ('low', 'Low Demand'), ('medium', 'Average Demand'), ('high', 'High Demand'),])
 
     def find_room(self):
         print(self.category_id.name)
@@ -98,7 +116,8 @@ class HostelRoom(models.Model):
         hostel_room_obj = self.env['hostel.room']
         all_members = hostel_room_obj.search([])
         print("TODOS LOS MIEMBROS:", all_members)
-        return True
+        print(dir(fields))
+        return all_members
 
     def update_room_no(self):
         self.roomNo = self.id
@@ -185,9 +204,9 @@ class HostelRoom(models.Model):
 
     @api.model
     def create(self, values):
-        _logger.info('Filtered Rooms: %s', values)#1
-        _logger.info('Filtered Rooms: %s', self)#hostel.room()
-        _logger.info('Filtered Rooms: %s',self.env.user)#res.users(2,)
+        _logger.info('Filtered Rooms: %s', values)
+        _logger.info('Filtered Rooms: %s', self)
+        _logger.info('Filtered Rooms: %s',self.env.user)
         user = self.env.user
         if not user.has_groups("my_hostel.group_hostel_manager"):
             values.get('remarks')
@@ -274,4 +293,10 @@ class HostelRoom(models.Model):
         result = self.env.cr.fetchall()
         _logger.warning("Hostel Room With Amount: %s", result)
 
-    
+    def sum_rent_amount(self):
+        sum = 0
+        all_rooms = self.search([])
+        for room in all_rooms:
+            sum += room.rent_amount
+        return sum
+        

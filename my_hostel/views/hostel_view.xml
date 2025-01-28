@@ -1,16 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- action -->
+    <record id="action_hostel" model="ir.actions.act_window">
+        <field name="name">Hostel</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hostel.hostel</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="search_hostel_view"/>
+        <!-- Si colocamos este filtro mostraremos campos inactivos -->
+        <!-- <field name="domain">[('active', '=', True)]</field> -->
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create Hostel
+            </p>
+        </field>
+    </record>
 
-    <!-- Menu de items -->
     
-    <!-- 1er registro - vista form del hostel -->
+    <!-- views -->
     <record id="view_hostel_form_view" model="ir.ui.view">
         <field name="name">hostel.hostel.form.view</field>
         <field name="model">hostel.hostel</field>
         <field name="arch" type="xml">
         
             <form string="Hostel">
+                <header>
+                    <button string="Add details" name="add_details" type="object"/>
+                </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="%(my_hostel.action_hostel)d" type="action" icon="fa-building" context="{'search_default_hostel_id': 'active_id'}">
+                            <field string="Rooms" name="rooms_count" widget="statinfo"/>
+                        </button>
+                    </div>
+
                     <div class="oe_title">
                         <h3>
                             <table>
@@ -32,14 +55,14 @@
                     <group string="General">
                         <group>
                             <label for="street" string="Address"/>
-                            <div class="o_address_format">
-                                <field name="street" placeholder="Street..." class="o_address_street"/>
-                                <field name="street2" placeholder="Street 2..." class="o_address_street"/>
-                                <field name="city" placeholder="City" class="o_address_city" />
-                                <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": False}' />
-                                <field name="zip" placeholder="ZIP" class="o_address_zip" />
-                                <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}' />
-                            </div>
+                        <div class="o_address_format">
+                            <field name="street" placeholder="Street..." class="o_address_street"/>
+                            <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                            <field name="city" placeholder="City" class="o_address_city" />
+                            <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": False}' />
+                            <field name="zip" placeholder="ZIP" class="o_address_zip" />
+                            <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}' />
+                        </div>  
                         </group>
                         <group>
                             <field name="phone" widget="phone" />
@@ -48,7 +71,7 @@
                         </group>
                         <group>
                             <field name="hostel_floors"/>
-                            <field name="active"/>
+                            <field name="active" invisible="1"/>
                             <field name="type"/>
                             <field name="hostel_rating"/>
                             <field name="other_info"/>
@@ -61,12 +84,13 @@
                         <!-- <field name="other"/> -->
                         <field name="is_public"/>
                         <field name="notes"/> 
+                        <field name="details_added"/>
                     </group>
                 </sheet>
             </form>
         </field>
     </record>
-    <!-- 2do registro - vista list del hostel-->
+
     <record id="view_hostel_tree_view" model="ir.ui.view">
         <field name="name">hostel.hostel.list.view</field>
         <field name="model">hostel.hostel</field>
@@ -82,4 +106,30 @@
             </list>
         </field>
     </record>
+
+    <record id="search_hostel_view" model="ir.ui.view">
+        <field name="name">hoste.hostel.search.view</field>
+        <field name="model">hostel.hostel</field>
+        <field name="arch" type="xml">
+            <search>
+
+                <!-- Filtros que se buscaran -->
+                <field name="is_public" string='public'/>
+                <!-- Filtros rapidos -->
+                <filter name="is_public" string="is public" domain="[('is_public', '=', False)]" groups ="my_hostel.group_hostel_manager"/>
+                <!-- Grupo de busqueda avanzada -->
+                <group expand="1">
+                    <filter name="name" string="Advanced Search" domain="[('active','=',False)]"/>
+                </group>
+
+            </search>
+        </field>
+    </record>
+
+    <!-- menu -->
+    <menuitem id="hostel_main_menu" name="Hostel" sequence="1" web_icon="my_hostel,static/description/icon.png"/>
+    <menuitem id="hostel_type_menu" name="Hostel" parent="hostel_main_menu" sequence="1" groups='my_hostel.group_hostel_manager'>
+        <menuitem id="hostel_type_menu_two" name="Hostel"  action="my_hostel.action_hostel" sequence="2" groups='my_hostel.group_hostel_manager'/>
+        <menuitem id="hostel_type_menu_three" name="Hostel_room"  action="my_hostel.action_hostel_room" sequence="2" groups='my_hostel.group_hostel_manager'/>
+    </menuitem>
 </odoo>

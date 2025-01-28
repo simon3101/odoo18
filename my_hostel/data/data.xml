@@ -34,6 +34,23 @@
 
         <!-- Funciones  -->
         <function model="hostel.room" name="_update_room_price"/>
-        
+    
+        <record id="stage_draft" model="hostel.room.stage">
+            <field name="name">Draft</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="stage_available" model="hostel.room.stage">
+            <field name="name">Available</field>
+            <field name="sequence">15</field>
+        </record>
+        <record id="stage_reserved" model="hostel.room.stage">
+            <field name="name">Reserved</field>
+            <field name="sequence">5</field>
+            <field name="fold">True</field>
+        </record>
+    
+
+
+
     </data>
 </odoo> 
