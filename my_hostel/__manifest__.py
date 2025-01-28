@@ -25,6 +25,7 @@
         "views/hostel_room_availability.xml",
         "views/config_view.xml",
         "views/room_view.xml",
+        "views/model_inline_view.xml"
 	],
     'assets':{
         #'web.assets_backend': ['web/static/src/xml/**/*',],

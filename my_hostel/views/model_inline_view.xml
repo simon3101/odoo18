@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="model_inline_action" model="ir.actions.act_window">
+        <field name="name">model.inline.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">model.inline</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="model_inline_view_list" model="ir.ui.view">
+        <field name="name">model.inline.view.list</field>
+        <field name="model">model.inline</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="sequence" widget="handle"/>
+                <field name="description"/>
+                <field name="line_ids" widget="many2many_tags"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="model_inline_view_form" model="ir.ui.view">
+        <field name="name">model_inline.view.form</field>
+        <field name="model">model.inline</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="line_ids" widget="many2many_tags">
+                                <list >
+                                    <field name="name"/>
+                                </list>
+                            </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="model_inline_menu" name="model_inline" action="model_inline_action" groups="my_hostel.group_hostel_manager" parent="my_hostel.hostel_main_menu" sequence='10'/>
+</odoo>
