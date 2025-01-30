@@ -3,7 +3,7 @@ from datetime import timedelta
 from odoo.exceptions import UserError
 from odoo.tools.translate import _
 # cap 8.6
-from odoo.tests.common import Form
+# from odoo.tests.common import Form
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -154,22 +154,22 @@ class HostelStudent(models.Model):
                 rec.duration_month = (rec.discharge_date.year - rec.admission_date.year) * 12 + \
                                 (rec.discharge_date.month - rec.admission_date.month)
     # cap 8.6
-    def return_room(self):
-        self.ensure_one()
-        wizard = self.env['assign.room.student.wizard']
-        _logger.info('Info about wizard: %s',wizard)
-        with Form(wizard) as return_form:
-            return_form.room_id = self.env.ref('my_hostel.hostel_room_1')
-            _logger.info('Info about return_room: %s',return_form)
-            record = return_form.save()
-            record.with_context(active_id=self.id).add_room_in_student()
-            _logger.info('Record: %s',record.search([]))
+    # def return_room(self):
+    #     self.ensure_one()
+    #     wizard = self.env['assign.room.student.wizard']
+    #     _logger.info('Info about wizard: %s',wizard)
+    #     with Form(wizard) as return_form:
+    #         return_form.room_id = self.env.ref('my_hostel.hostel_room_1')
+    #         _logger.info('Info about return_room: %s',return_form)
+    #         record = return_form.save()
+    #         record.with_context(active_id=self.id).add_room_in_student()
+    #         _logger.info('Record: %s',record.search([]))
     # cap 8.4
-    def add_room_in_student_wizard(self):
-        self.ensure_one()
-        return {
-            'name': 'Assign Room',
-            'type': 'ir.actions.act_window',
-            'res_model': 'assign.room.student.wizard',
-            'target':'new',
-        }
+    # def add_room_in_student_wizard(self):
+    #     self.ensure_one()
+    #     return {
+    #         'name': 'Assign Room',
+    #         'type': 'ir.actions.act_window',
+    #         'res_model': 'assign.room.student.wizard',
+    #         'target':'new',
+    #     }
