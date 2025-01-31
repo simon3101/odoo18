@@ -4,10 +4,25 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
-            <!-- Agregar el campo personalizado en la vista de facturas -->
             <xpath expr="//field[@name='tax_totals']" position="before">
-                <field name="amount_tax_base"/>
+
+                <field name="amount_tax_base" nolabel='0' colspan='2' />
             </xpath>
         </field>
     </record>
+
+    <!-- <template id="my_custom_template" inherit_id="account.tax_totals.xml" name="My custom template">
+        <xpath expr="//div[@class='o_list_monetary']" position="after">
+            <tr>
+                <td class="o_td_label">
+                    <label class="o_form_label o_tax_total_label">Amount tax base</label>
+                </td>
+                <td class="o_td_label">
+                    <span style="white-space: nowrap; font-weight: bold;">3,308.00</span>
+                </td>
+            </tr>
+        </xpath>
+    </template> -->
+    
+
 </odoo>

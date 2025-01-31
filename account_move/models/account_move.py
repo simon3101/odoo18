@@ -23,3 +23,6 @@ class AccountMove(models.Model):
                 print('taxes',line.price_subtotal)
                 move.amount_tax_base += line.price_subtotal
                 # print("move",move.line_ids.tax_ids.amount)
+
+    def _compute_tax_totals(self):
+        super()._compute_tax_totals(self.amount_tax_base)
