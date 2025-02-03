@@ -6,6 +6,10 @@
     'author': 'simon',
     'depends': ['account'],  # Depende del módulo account
     'data': [
-        'views/account_sub_total_view.xml'
     ],
+    'assets': {
+        'web.assets_backend': [
+            'account_move/static/src/components/tax_totals/tax_totals.xml',
+        ],
+    },
 }

@@ -10,19 +10,26 @@ class AccountMove(models.Model):
             stored=True,
             compute='_compute_amount_own')
 
-    @api.depends(
-        'line_ids',
-        )
+    @api.depends('line_ids.tax_ids',
+                'line_ids.price_subtotal')
     def _compute_amount_own(self):
         for move in self:
             # me esta recorriendo las facturas
-            move.amount_tax_base = 0.0
+            amount_tax_base = 0.0
             line_taxes = move.line_ids.filtered(lambda t: t.tax_ids.amount > 0)
             for line in line_taxes: 
-                # me esta recorriendo las lineas de la factura
                 print('taxes',line.price_subtotal)
-                move.amount_tax_base += line.price_subtotal
-                # print("move",move.line_ids.tax_ids.amount)
+                amount_tax_base += line.price_subtotal
+            # actualizamos el campo en la base de datos al terminar el bucle for
+            move.amount_tax_base += amount_tax_base
 
+    
     def _compute_tax_totals(self):
-        super()._compute_tax_totals(self.amount_tax_base)
+        # Llamamos al super para mantener la lógica original
+        super()._compute_tax_totals()
+        for move in self:
+            if move.tax_totals:
+                # Agregamos nuestro nuevo valor al diccionario tax_totals
+                move.tax_totals['amount_tax_base'] = move.amount_tax_base
+
+        
